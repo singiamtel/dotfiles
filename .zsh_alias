@@ -1,0 +1,50 @@
+# Global aliases
+alias -g G="|egrep -i"
+alias -g CP="|xclip -selection clipboard"
+
+# Shortcuts
+alias e="nvim"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias cfv="nvim ~/.config/nvim/init.vim"
+alias SS="sudo systemctl"
+alias r="ranger"
+alias ka="killall"
+alias g="git"
+alias gs="git status"
+alias cp="rsync --archive --human-readable --progress --verbose --whole-file"
+alias mkd="mkdir -pv"
+alias cleartex="rm *.aux *.dvi *.log"
+alias dotf="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias virc="e $HOME/.config/nvim/init.vim"
+alias fatvi="e -u $HOME/.config/fat-nvim/init.vim"
+alias ww='vim -c VimwikiIndex'
+alias todo='vim -c VimwikiIndex'
+alias calc="python -i ~/.config/math_mode.py"
+alias config='/usr/bin/git --git-dir=/home/sergio/.cfg/ --work-tree=/home/sergio'
+
+# Misc aliases and default flags behaviour
+alias ref="source ~/.zshrc"
+alias tb="nc termbin.com 9999 | tr -d '\\n' | xclip -selection clipboard"
+alias cd..="cd .."
+alias df="df -h"
+alias exa="exa --long --header --git"
+alias sudo='sudo '
+
+# Youtube
+alias yt="youtube-dl --add-metadata -i" # Download video link
+alias yta="yt -x -f bestaudio/best" # Download only audio
+
+# Color
+alias ls='ls -hN --color=auto --group-directories-first'
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias pacman="pacman --color=auto"
+alias yay="yay --color=auto"
+
+# System Maintainence
+alias sdn="sudo shutdown now"
+
+# GHC is retarded
+alias ghc="ghc -dynamic"
