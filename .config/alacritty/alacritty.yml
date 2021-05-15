@@ -59,7 +59,7 @@ colors:
 selection:
   save_to_clipboard: true
 font:
-  size: 14.0
+  size: 18.0
   normal:
       family: "FiraCode Nerd Font"
       # Style can be specified to pick a specific face.
