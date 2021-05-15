@@ -14,9 +14,8 @@ plugins=(
 	git
 	z
 	fzf-tab
+	zsh-autosuggestions
 )
-
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 zstyle ":completion:*:git-checkout:*" sort false
 zstyle ':completion:*:descriptions' format '[%d]'
