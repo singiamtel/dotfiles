@@ -9,7 +9,7 @@ This repository keeps all of the config files I use on my workflow
 
 ```bash
 echo ".cfg" >> .gitignore
-git clone --bare <remote-git-repo-url> $HOME/.cfg
+git clone --bare git@github.com:singiamtel/dotfiles.git $HOME/.cfg
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 config config --local status.showUntrackedFiles no
 config checkout
