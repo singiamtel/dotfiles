@@ -22,7 +22,7 @@ Plug 'tpope/vim-markdown'
 " COC
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']  " list of CoC extensions needed
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-clangd']  " list of CoC extensions needed
 
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 
@@ -106,8 +106,7 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 nnoremap <F1> :QFix<cr>
-nnoremap <F2> :cp<cr>
-nnoremap <F3> :cn<cr>
+nmap <F2> <Plug>(coc-rename)
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>s :UltiSnipsEdit<cr>
@@ -119,7 +118,7 @@ nnoremap <leader>a :e #<cr>
 
 let $RTP=split(&runtimepath, ',')[0]
 
-let airline_theme="atomic"
+" let airline_theme="atomic"
 let g:rooter_silent_chdir = 1
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
@@ -131,6 +130,6 @@ hi Conceal ctermbg=none
 hi SpellBad cterm=underline ctermfg=red
 
 let g:tex_flavor='latex'
-let AutoPairs= {'(':')', '[':']', '{':'}',"`":"`"}
+let AutoPairs= {'(':')', '[':']', '{':'}'}
 
 let g:vimwiki_list = [{'path': '~/main/vimwiki', 'path_html': '~/main/vimwiki/public_html/'}]
