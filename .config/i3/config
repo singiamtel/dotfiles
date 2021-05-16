@@ -32,13 +32,11 @@ floating_modifier $mod
 exec --no-startup-id unclutter
 exec --no-startup-id feh --bg-fill ~/.config/wallpaper.jpg
 # exec --no-startup-id transmission-daemon --paused
-exec --no-startup-id setbg
 exec --no-startup-id redshift
-exec --no-startup-id remaps
+exec --no-startup-id xset r rate 300 50
 # exec --no-startup-id mpd
 exec --no-startup-id dunst
-exec --no-startup-id dropbox-cli start
-exec --no-startup-id checkup
+# exec --no-startup-id checkup
 exec --no-startup-id compton --config ~/.config/compton.conf -b 
 exec_always --no-startup-id killall -USR1 compton
 # exec_always --no-startup-id podentr
