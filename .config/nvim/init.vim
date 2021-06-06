@@ -18,7 +18,6 @@ Plug 'tpope/vim-markdown'
 " WTF
 " Plug 'codota/tabnine-vim'
 
-
 " COC
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 
@@ -116,6 +115,15 @@ nnoremap <leader>f :Files<cr>
 nnoremap <leader>s :Rg<cr>
 nnoremap <leader>g :LazyGit<cr>
 nnoremap <leader>a :e #<cr>
+nnoremap <leader>1 :b1<cr>
+nnoremap <leader>2 :b2<cr>
+nnoremap <leader>3 :b3<cr>
+nnoremap <leader>4 :b4<cr>
+nnoremap <leader>5 :b5<cr>
+nnoremap <leader>6 :b6<cr>
+nnoremap <leader>7 :b7<cr>
+nnoremap <leader>8 :b8<cr>
+nnoremap <leader>9 :b9<cr>
 
 let $RTP=split(&runtimepath, ',')[0]
 
