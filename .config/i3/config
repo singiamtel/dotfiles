@@ -36,6 +36,7 @@ exec --no-startup-id redshift
 exec --no-startup-id xset r rate 300 50
 # exec --no-startup-id mpd
 exec --no-startup-id dunst
+exec --no-startup-id xset -b 
 # exec --no-startup-id checkup
 exec --no-startup-id compton --config ~/.config/compton.conf -b 
 exec_always --no-startup-id killall -USR1 compton
