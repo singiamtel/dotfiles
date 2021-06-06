@@ -138,6 +138,8 @@ hi Conceal ctermbg=none
 " hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=red
 
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 let g:tex_flavor='latex'
 let AutoPairs= {'(':')', '[':']', '{':'}'}
 
