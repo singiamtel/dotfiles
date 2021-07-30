@@ -18,6 +18,7 @@ set zoom-min 10
 set guioptions "s"
 
 set selection-clipboard clipboard
+set font "inconsolata 18"
 
 set notification-error-bg       "#586e75" # base01  # seem not work
 set notification-error-fg       "#dc322f" # red
