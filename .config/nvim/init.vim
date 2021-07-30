@@ -71,6 +71,7 @@ set backspace=indent,eol,start
 set clipboard=unnamedplus
 set confirm
 set ignorecase
+set smartcase
 set hidden
 set mouse=a
 set nohlsearch
