@@ -18,11 +18,11 @@ Plug 'tpope/vim-markdown'
 " WTF
 " Plug 'codota/tabnine-vim'
 
-
 " COC
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
 
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier']  " list of CoC extensions needed
+let g:coc_global_extensions = ['coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-clangd']  " list of CoC extensions needed
+" 'coc-tslint-plugin', 
 
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
 
@@ -72,6 +72,7 @@ set clipboard=unnamedplus
 set confirm
 set smartcase
 set ignorecase
+set smartcase
 set hidden
 set mouse=a
 set nohlsearch
@@ -118,10 +119,19 @@ nnoremap <leader>r :Rg<cr>
 nnoremap <leader>g :Ag<cr>
 nnoremap <leader>G :LazyGit<cr>
 nnoremap <leader>a :e #<cr>
+nnoremap <leader>1 :b1<cr>
+nnoremap <leader>2 :b2<cr>
+nnoremap <leader>3 :b3<cr>
+nnoremap <leader>4 :b4<cr>
+nnoremap <leader>5 :b5<cr>
+nnoremap <leader>6 :b6<cr>
+nnoremap <leader>7 :b7<cr>
+nnoremap <leader>8 :b8<cr>
+nnoremap <leader>9 :b9<cr>
 
 let $RTP=split(&runtimepath, ',')[0]
 
-let airline_theme="atomic"
+" let airline_theme="atomic"
 let g:rooter_silent_chdir = 1
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<tab>'
@@ -132,7 +142,9 @@ hi Conceal ctermbg=none
 " hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=red
 
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 let g:tex_flavor='latex'
-let AutoPairs= {'(':')', '[':']', '{':'}',"`":"`"}
+let AutoPairs= {'(':')', '[':']', '{':'}'}
 
 let g:vimwiki_list = [{'path': '~/main/vimwiki', 'path_html': '~/main/vimwiki/public_html/'}]
