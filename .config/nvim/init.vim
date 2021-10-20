@@ -37,9 +37,13 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
+Plug 'stsewd/gx-extended.vim'
+
 Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
+
+Plug 'tpope/vim-repeat'
 
 Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 
@@ -51,6 +55,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'metakirby5/codi.vim'
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb' " Github extension
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'cedarbaum/fugitive-azure-devops.vim'
 Plug 'mhinz/vim-signify'
 
 Plug 'liuchengxu/graphviz.vim'
@@ -84,6 +91,7 @@ set number
 set path=.,**
 set shortmess=oOtTatI " Multiple flags, :help shortmess // +=?
 set spelllang=en_us,es
+set splitbelow splitright
 set tabstop=4 shiftwidth=4
 set termguicolors
 set timeoutlen=300
@@ -126,6 +134,10 @@ nnoremap <leader>7 :b7<cr>
 nnoremap <leader>8 :b8<cr>
 nnoremap <leader>9 :b9<cr>
 
+nnoremap <leader>gl :diffget //2<CR>
+nnoremap <leader>gr :diffget //3<CR>
+nnoremap <leader>gs :G<CR>
+
 let $RTP=split(&runtimepath, ',')[0]
 
 " let airline_theme="atomic"
@@ -140,6 +152,7 @@ hi Conceal ctermbg=none
 hi SpellBad cterm=underline ctermfg=red
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType *.astro set filetype=astro
 
 let g:tex_flavor='latex'
 let AutoPairs= {'(':')', '[':']', '{':'}'}

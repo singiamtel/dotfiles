@@ -1,6 +1,0 @@
-{
-  "coc.preferences.formatOnSaveFiletypes": ["js", "jsx", "ts", "tsx"],
-  "eslint.run": "onSave",
-  "eslint.autoFixOnSave": true,
-  "eslint.quiet": true
-}
