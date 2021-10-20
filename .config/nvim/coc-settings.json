@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["js", "javascriptreact", "ts", "typescriptreact"],
+  "coc.preferences.formatOnSaveFiletypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
   "eslint.quiet": true,
