@@ -1,0 +1,7 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["js", "javascriptreact", "ts", "typescriptreact"],
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+  "eslint.quiet": true,
+  "prettier.eslintIntegration": true
+}

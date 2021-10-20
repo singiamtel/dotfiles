@@ -77,6 +77,7 @@ syntax on
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 set confirm
+set smartcase
 set ignorecase
 set smartcase
 set hidden
@@ -97,7 +98,7 @@ set termguicolors
 set timeoutlen=300
 set undodir=$HOME/.config/nvim/undo
 set undofile
-set nolist lcs=tab:\┊\ "
+set list lcs=tab:\┊\ "
 
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
@@ -116,13 +117,15 @@ map <C-l> <C-w>l
 
 nnoremap <F1> :QFix<cr>
 nmap <F2> <Plug>(coc-rename)
+nnoremap <F3> :cn<cr>
 
 nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nnoremap <leader>s :UltiSnipsEdit<cr>
 nnoremap <leader>d :SearchDoc<cr>
 nnoremap <leader>f :Files<cr>
-nnoremap <leader>s :Rg<cr>
-nnoremap <leader>g :LazyGit<cr>
+nnoremap <leader>r :Rg<cr>
+nnoremap <leader>g :Ag<cr>
+nnoremap <leader>G :LazyGit<cr>
 nnoremap <leader>a :e #<cr>
 nnoremap <leader>1 :b1<cr>
 nnoremap <leader>2 :b2<cr>
