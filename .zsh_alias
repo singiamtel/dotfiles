@@ -32,6 +32,7 @@ alias df="df -h"
 alias exa="exa --long --header --git"
 alias sudo='sudo '
 alias cal='cal --monday'
+alias ip='ip --color=always'
 
 # Youtube
 alias yt="youtube-dl --add-metadata -i" # Download video link
