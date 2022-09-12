@@ -4,19 +4,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 
 Plug 'haya14busa/incsearch.vim'
-
+" 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'digitaltoad/vim-pug'
-
+" 
 Plug 'machakann/vim-highlightedyank'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-markdown'
 
-" WTF
-" Plug 'codota/tabnine-vim'
+Plug 'github/copilot.vim'
 
 " COC
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
@@ -49,8 +48,6 @@ Plug 'kdheepak/lazygit.nvim', { 'branch': 'nvim-v0.4.3' }
 
 Plug 'airblade/vim-rooter'
 Plug 'liuchengxu/vim-which-key'
-
-Plug 'jiangmiao/auto-pairs'
 
 Plug 'metakirby5/codi.vim'
 
@@ -150,9 +147,8 @@ let $RTP=split(&runtimepath, ',')[0]
 
 " let airline_theme="atomic"
 let g:rooter_silent_chdir = 1
+" let g:UltiSnipsExpandTrigger = '<s-tab>'
 let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 let g:netrw_dirhistmax = 0
 set conceallevel=2
 hi Conceal ctermbg=none
