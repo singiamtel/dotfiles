@@ -18,7 +18,7 @@ Plug 'tpope/vim-markdown'
 Plug 'github/copilot.vim'
 
 " COC
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} " this is for auto complete, prettier and tslinting
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 let g:coc_global_extensions = ['coc-tsserver', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-clangd']  " list of CoC extensions needed
 " 'coc-tslint-plugin', 
