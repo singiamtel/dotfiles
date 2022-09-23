@@ -23,8 +23,8 @@ alias fatvi="e -u $HOME/.config/fat-nvim/init.vim"
 alias ww='vim -c VimwikiIndex'
 alias todo='vim -c VimwikiIndex'
 alias calc="python -i ~/.config/math_mode.py"
-alias config='/usr/bin/git --git-dir=/home/sergio/.cfg/ --work-tree=/home/sergio'
-alias lazyconf='lazygit --git-dir=/home/sergio/.cfg/ --work-tree=/home/sergio'
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=/home/sergio"
+alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=/home/sergio"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
