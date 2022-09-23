@@ -1,6 +1,7 @@
 # Global aliases
 alias -g G="|egrep -i"
 alias -g CP="|xclip -selection clipboard"
+alias -g cover="~/CV/Cover\ Letters/"
 
 # Shortcuts
 alias e="nvim"
@@ -23,6 +24,7 @@ alias ww='vim -c VimwikiIndex'
 alias todo='vim -c VimwikiIndex'
 alias calc="python -i ~/.config/math_mode.py"
 alias config='/usr/bin/git --git-dir=/home/sergio/.cfg/ --work-tree=/home/sergio'
+alias lazyconf='lazygit --git-dir=/home/sergio/.cfg/ --work-tree=/home/sergio'
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
@@ -33,6 +35,7 @@ alias exa="exa --long --header --git"
 alias sudo='sudo '
 alias cal='cal --monday'
 alias ip='ip --color=always'
+alias mv="mv -i"
 
 # Youtube
 alias yt="youtube-dl --add-metadata -i" # Download video link
@@ -48,5 +51,5 @@ alias yay="yay --color=auto"
 # System Maintainence
 alias sdn="sudo shutdown now"
 
-# GHC is retarded
+# GHC is dumb
 alias ghc="ghc -dynamic"
