@@ -4,16 +4,16 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 
 Plug 'haya14busa/incsearch.vim'
-" 
+
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'digitaltoad/vim-pug'
-" 
+
 Plug 'machakann/vim-highlightedyank'
 Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-markdown'
 
 Plug 'github/copilot.vim'
 
@@ -24,11 +24,6 @@ let g:coc_global_extensions = ['coc-tsserver', 'coc-css', 'coc-html', 'coc-json'
 " 'coc-tslint-plugin', 
 
 Plug 'jiangmiao/auto-pairs' "this will auto close ( [ {
-
-" these two plugins will add highlighting and indenting to JSX and TSX files.
-Plug 'yuezk/vim-js'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'maxmellon/vim-jsx-pretty'
 
 "END COC
 
@@ -41,6 +36,7 @@ Plug 'stsewd/gx-extended.vim'
 Plug 'yuezk/vim-js'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'gko/vim-coloresque'
 
 Plug 'tpope/vim-repeat'
 
@@ -104,6 +100,7 @@ inoremap <F1> <nop>
 " vnoremap <CR> :
 nnoremap N Nzzzv
 nnoremap Q <nop>
+nnoremap qq :bd<CR>
 nnoremap n nzzzv
 noremap <F1> <nop>
 
@@ -162,3 +159,6 @@ let g:tex_flavor='latex'
 let AutoPairs= {'(':')', '[':']', '{':'}'}
 
 let g:vimwiki_list = [{'path': '~/main/vimwiki', 'path_html': '~/main/vimwiki/public_html/'}]
+let g:copilot_filetypes = {
+   \ 'markdown': v:true,
+   \ }

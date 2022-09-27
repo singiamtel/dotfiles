@@ -25,6 +25,7 @@ alias todo='vim -c VimwikiIndex'
 alias calc="python -i ~/.config/math_mode.py"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=/home/sergio"
 alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=/home/sergio"
+alias lg="lazygit"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
@@ -38,7 +39,7 @@ alias ip='ip --color=always'
 alias mv="mv -i"
 
 # Youtube
-alias yt="youtube-dl --add-metadata -i" # Download video link
+alias yt="yt-dlp --add-metadata -i" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
 
 # Color
