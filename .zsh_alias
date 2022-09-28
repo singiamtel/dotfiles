@@ -54,3 +54,5 @@ alias sdn="sudo shutdown now"
 
 # GHC is dumb
 alias ghc="ghc -dynamic"
+
+alias defenestrate="rm -rf"
