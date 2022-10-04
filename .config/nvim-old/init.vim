@@ -10,7 +10,7 @@ Plug 'honza/vim-snippets'
 Plug 'digitaltoad/vim-pug'
 
 Plug 'machakann/vim-highlightedyank'
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'vimwiki/vimwiki'
 " Plug 'tpope/vim-markdown'
@@ -80,7 +80,7 @@ set nrformats=alpha,hex,bin
 set noshowmode
 set nospell
 set noswapfile
-set number
+set number relativenumber
 " Set path recursive to current folder, might cause lag on big codebases
 set path=.,**
 set shortmess=oOtTatI " Multiple flags, :help shortmess // +=?
