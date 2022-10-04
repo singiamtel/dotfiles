@@ -8,7 +8,7 @@ alias e="nvim"
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias cfv="nvim ~/.config/nvim/init.vim"
+alias cfv="nvim ~/.config/nvim/lua/mine"
 alias SS="sudo systemctl"
 alias r="ranger"
 alias ka="killall"
@@ -23,9 +23,10 @@ alias fatvi="e -u $HOME/.config/fat-nvim/init.vim"
 alias ww='vim -c VimwikiIndex'
 alias todo='vim -c VimwikiIndex'
 alias calc="python -i ~/.config/math_mode.py"
-alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=/home/sergio"
-alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=/home/sergio"
+alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
+alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias lg="lazygit"
+alias t="tmux new-session -A -s main"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
