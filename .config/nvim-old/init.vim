@@ -152,7 +152,7 @@ hi Conceal ctermbg=none
 " hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=red
 
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd FileType *.astro set filetype=astro
 
 let g:tex_flavor='latex'
