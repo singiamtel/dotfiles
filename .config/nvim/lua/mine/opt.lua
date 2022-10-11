@@ -1,7 +1,7 @@
 vim.opt.backspace="indent,eol,start"
 vim.opt.clipboard="unnamedplus"
 vim.opt.completeopt="menu,menuone,noselect"
-vim.opt.conceallevel=0
+vim.opt.conceallevel=2
 vim.opt.confirm = true
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
@@ -75,9 +75,11 @@ require('lualine').setup {
 }
 vim.cmd("set spelllang=en_us")
 vim.cmd('autocmd FileType javascript let t:command="npm test"')
+vim.cmd("autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o")
 
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+-- vim.g.AutoPairs = "{'(':')', '[':']', '{':'}'}"
 
 require("nvim-tree").setup({
   sort_by = "case_sensitive",
@@ -97,3 +99,5 @@ require("nvim-tree").setup({
 	custom = { "^.git$" } 
   },
 })
+require('telescope').setup{  defaults = { file_ignore_patterns = { "node_modules" }} }
+require('leap').set_default_keymaps()

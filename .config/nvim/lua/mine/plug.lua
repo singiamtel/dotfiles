@@ -9,13 +9,14 @@ return require('packer').startup(function(use)
 
 	-- LSP
 	use {
-		"williamboman/nvim-lsp-installer",
-		config = function()
-			require("nvim-lsp-installer").setup {}
-		end
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+		"lukas-reineke/lsp-format.nvim"
 	}
 
-	use 'neovim/nvim-lspconfig'
+	use 'ggandor/leap.nvim'
+
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
@@ -39,6 +40,7 @@ return require('packer').startup(function(use)
 	use 'machakann/vim-highlightedyank'
 
 	use 'tpope/vim-repeat'
+	use 'tpope/vim-surround'
 	use 'tpope/vim-fugitive'
 	use 'mhinz/vim-signify'
 	use 'tpope/vim-commentary'
@@ -47,13 +49,6 @@ return require('packer').startup(function(use)
 
 	use 'jiangmiao/auto-pairs'
 
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			require("which-key").setup {
-			}
-		end
-	}
 	use {
 		'filipdutescu/renamer.nvim',
 		branch = 'master',
