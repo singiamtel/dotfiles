@@ -27,12 +27,21 @@ return require('packer').startup(function(use)
 	use 'quangnguyen30192/cmp-nvim-ultisnips'
 	use 'honza/vim-snippets'
 	use 'github/copilot.vim'
+	use "MunifTanjim/nui.nvim"
+	use "rcarriga/nvim-notify"
+	-- use("folke/noice.nvim")
+	use('jose-elias-alvarez/null-ls.nvim')
+	use('MunifTanjim/prettier.nvim')
+
+	use {'ziontee113/neo-minimap'}
+
 	use {
 		'kyazdani42/nvim-tree.lua',
 		requires = {
 			'kyazdani42/nvim-web-devicons', -- optional, for file icons
 		},
 	}
+
 
 	use 'tpope/vim-obsession'
 	use 'dhruvasagar/vim-prosession'

@@ -56,7 +56,7 @@ cmp.setup.cmdline(':', {
 })
 
 -- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all"
@@ -78,7 +78,7 @@ require'nvim-treesitter.configs'.setup {
 		additional_vim_regex_highlighting = false,
 	},
 }
-vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 -- local M = {}
 
 -- M.icons = {
@@ -124,8 +124,8 @@ require("lspconfig").eslint.setup(
 {
 	capabilities = capabilities,
 	flags = {debounce_text_changes = 500},
-	on_attact = function(client, bufnr)
-		client.server_capabilities.documentFormattingProvider = true
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
 	end
 }
 )
@@ -137,7 +137,7 @@ lspconfig['pyright'].setup{
 }
 lspconfig['tsserver'].setup{
 	on_attach = function(client, bufnr)
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.document_formatting = false
 	end,
 	flags = lsp_flags,
 }
@@ -146,8 +146,9 @@ lspconfig['jdtls'].setup{
 	flags = lsp_flags,
 }
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-  command = 'silent! EslintFixAll',
-  group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+--   command = 'silent! Prettier',
+--   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
+-- })
+
