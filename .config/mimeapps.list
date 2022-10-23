@@ -32,3 +32,5 @@ x-scheme-handler/postman=Postman.desktop
 x-scheme-handler/tg=userapp-Telegram Desktop-QICWS1.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/notion=notion-app.desktop
+x-scheme-handler/obsidian=obsidian.desktop
+x-scheme-handler/insomnia=insomnia.desktop

@@ -1,5 +1,5 @@
 # Global aliases
-alias -g G="|egrep -i"
+alias -g G="|grep -Ei"
 alias -g CP="|xclip -selection clipboard"
 alias -g cover="~/CV/Cover\ Letters/"
 
@@ -27,6 +27,7 @@ alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias lg="lazygit"
 alias t="tmux new-session -A -s main"
+alias dragon="dragon-drop"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
