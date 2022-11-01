@@ -27,13 +27,13 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', builtin.find_files)
 vim.keymap.set('n', '<leader>g', builtin.live_grep)
 vim.keymap.set('n', '<leader>b', builtin.buffers)
+vim.keymap.set('n', '<leader>e', builtin.diagnostics)
+vim.keymap.set('n', '<leader>gf', '<cmd>e <cfile><cr>', { noremap = true, silent = true })
 
 -- Fugitive
 -- vim.keymap.set('n', '<leader>gs', ':G<CR>')
 -- nnoremap <leader>g :Ag<cr>
 vim.keymap.set('', '<F2>', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
 vim.keymap.set('', '<F3>', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})<cr>', { noremap = true, silent = true })
-
-
 
 -- nnoremap <leader>s :UltiSnipsEdit<cr>

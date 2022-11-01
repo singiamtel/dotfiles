@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver", "jdtls", "pyright" }
+	ensure_installed = { "tsserver", "jdtls", "pyright", "csharp_ls", "omnisharp"},
 })
 
 local cmp = require("cmp")
@@ -79,31 +79,6 @@ require'nvim-treesitter.configs'.setup {
 	},
 }
 -- vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
--- local M = {}
-
--- M.icons = {
--- 	Class = " ",
--- 	Color = " ",
--- 	Constant = " ",
--- 	Constructor = " ",
--- 	Enum = "了 ",
--- 	EnumMember = " ",
--- 	Field = " ",
--- 	File = " ",
--- 	Folder = " ",
--- 	Function = " ",
--- 	Interface = "ﰮ ",
--- 	Keyword = " ",
--- 	Method = "ƒ ",
--- 	Module = " ",
--- 	Property = " ",
--- 	Snippet = "﬌ ",
--- 	Struct = " ",
--- 	Text = " ",
--- 	Unit = " ",
--- 	Value = " ",
--- 	Variable = " ",
--- }
 
 local lspkind = require('lspkind')
 cmp.setup {
@@ -119,16 +94,29 @@ cmp.setup {
 	}
 }
 require("lsp-format").setup {}
-require("lspconfig").gopls.setup { on_attach = require("lsp-format").on_attach }
-require("lspconfig").eslint.setup(
-{
-	capabilities = capabilities,
-	flags = {debounce_text_changes = 500},
-	on_attach = function(client, bufnr)
-		client.server_capabilities.documentFormattingProvider = false
-	end
-}
-)
+
+local on_attach_fn = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+end
 
 local lspconfig = require('lspconfig')
 lspconfig['pyright'].setup{
@@ -137,18 +125,45 @@ lspconfig['pyright'].setup{
 }
 lspconfig['tsserver'].setup{
 	on_attach = function(client, bufnr)
+		on_attach_fn(client, bufnr)
 		client.server_capabilities.document_formatting = false
 	end,
 	flags = lsp_flags,
 }
 lspconfig['jdtls'].setup{
-	on_attach = on_attach,
+	on_attach = on_attach_fn,
 	flags = lsp_flags,
 }
 
--- vim.api.nvim_create_autocmd('BufWritePre', {
---   pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
---   command = 'silent! Prettier',
---   group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
--- })
+lspconfig.gopls.setup { on_attach = on_attach_fn }
+lspconfig.eslint.setup(
+{
+	capabilities = capabilities,
+	flags = {debounce_text_changes = 500},
+	on_attach = function(client, bufnr)
+		client.server_capabilities.documentFormattingProvider = false
+		on_attach_fn(client, bufnr)
+	end
+}
+)
 
+lspconfig["csharp_ls"].setup(
+{
+	capabilities = capabilities,
+	on_attach = on_attach_fn,
+	flags = lsp_flags,
+	cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+	init_options = {
+		configurationsPath = vim.fn.stdpath("config") .. "/omnisharp",
+	},
+	filetypes = { "cs", "vb" },
+	root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj", ".git"),
+}
+)
+
+
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)

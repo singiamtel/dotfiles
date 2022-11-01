@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
 	use 'mhinz/vim-signify'
 	use 'tpope/vim-commentary'
 	use 'tpope/vim-markdown'
+	use 'ThePrimeagen/harpoon'
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
 	use 'jiangmiao/auto-pairs'
