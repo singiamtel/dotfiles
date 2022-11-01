@@ -3,9 +3,14 @@ ZSH_THEME="ys"
 DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE="true"
 
-autoload -Uz compinit promptinit
 autoload edit-command-line; zle -N edit-command-line
+autoload -Uz compinit && compinit
+autoload -Uz promptinit && promptinit
 zstyle ':completion:*' menu select
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 setopt autocd autopushd pushdignoredups histignorealldups numericglobsort appendhistory extendedglob
 
@@ -17,11 +22,6 @@ plugins=(
 	fzf-tab
 	zsh-autosuggestions
 )
-
-zstyle ":completion:*:git-checkout:*" sort false
-zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
 source $ZSH/oh-my-zsh.sh
 
