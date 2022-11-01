@@ -28,6 +28,7 @@ alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias lg="lazygit"
 alias t="tmux new-session -A -s main"
 alias dragon="dragon-drop"
+alias ex="(dolphin .  & disown) > /dev/null 2>&1"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
@@ -48,8 +49,6 @@ alias yta="yt -x -f bestaudio/best" # Download only audio
 alias ls='ls -hN --color=auto --group-directories-first'
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
-alias pacman="pacman --color=auto"
-alias yay="yay --color=auto"
 
 # System Maintainence
 alias sdn="sudo shutdown now"
