@@ -17,6 +17,8 @@ return require('packer').startup(function(use)
 
 	use 'ggandor/leap.nvim'
 
+	use 'wellle/context.vim'
+
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
 	use 'hrsh7th/cmp-path'
