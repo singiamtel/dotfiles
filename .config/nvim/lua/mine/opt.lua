@@ -10,7 +10,7 @@ vim.opt.smartcase = true
 vim.opt.hidden = true
 vim.opt.mouse="a"
 vim.opt.hlsearch = false
-vim.opt.nrformats=alpha,hex,bin
+vim.opt.nrformats= vim.opt.nrformats + "alpha"
 vim.opt.showmode = false
 vim.opt.spell = false
 vim.opt.swapfile = false
@@ -85,6 +85,7 @@ vim.cmd('autocmd BufNewFile,BufRead *astro set ft=astro')
 
 -- vim.g.AutoPairs = "{'(':')', '[':']', '{':'}'}"
 vim.cmd("let g:AutoPairs = {'(':')', '[':']', '{':'}'}")
+vim.cmd("let g:context_max_height = 3")
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -107,7 +108,7 @@ require("nvim-tree").setup({
 	},
 })
 require('telescope').setup{ defaults = { 
-	file_ignore_patterns = { "node_modules" },
+	file_ignore_patterns = { "node_modules", ".git", "test", "data/mods" },
 	layout_config = {
 		preview_width = 60,
 	},
