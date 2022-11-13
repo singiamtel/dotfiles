@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver", "jdtls", "pyright", "csharp_ls", "omnisharp"},
+	ensure_installed = { "tsserver", "jdtls", "pyright", "csharp_ls", "omnisharp", "tailwindcss"},
 })
 
 local cmp = require("cmp")
@@ -72,7 +72,7 @@ require'nvim-treesitter.configs'.setup {
 			local max_filesize = 150 * 1024 -- 150 KB
 			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 			if ok and stats and stats.size > max_filesize then
-				return true
+				-- return true
 			end
 		end,
 		additional_vim_regex_highlighting = false,
@@ -93,7 +93,7 @@ cmp.setup {
 		})
 	}
 }
-require("lsp-format").setup {}
+-- require("lsp-format").setup {}
 
 local on_attach_fn = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -136,16 +136,6 @@ lspconfig['jdtls'].setup{
 }
 
 lspconfig.gopls.setup { on_attach = on_attach_fn }
-lspconfig.eslint.setup(
-{
-	capabilities = capabilities,
-	flags = {debounce_text_changes = 500},
-	on_attach = function(client, bufnr)
-		client.server_capabilities.documentFormattingProvider = false
-		on_attach_fn(client, bufnr)
-	end
-}
-)
 
 lspconfig["csharp_ls"].setup(
 {
@@ -161,9 +151,70 @@ lspconfig["csharp_ls"].setup(
 }
 )
 
+lspconfig["tailwindcss"].setup(
+{
+	capabilities = capabilities,
+	on_attach = on_attach_fn,
+	flags = lsp_flags,
+}
+)
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+
+if vim.fn.filereadable(".prettierrc.json") == 1 then
+	-- local null_ls = require("null-ls")
+
+	-- null_ls.setup({
+	-- 	on_attach = function(client, bufnr)
+	-- 		client.server_capabilites.documentFormattingProvider = true
+	-- 		-- if client.server_capabilities.documentFormattingProvider then
+	-- 		-- format on save
+	-- 		-- vim.cmd("autocmd InsertLeave <buffer> lua vim.lsp.buf.format()")
+
+	-- 	end,
+	-- })
+	-- vim.lsp.null_ls.setup.timeout_ms = 5000
+	-- local prettier = require("prettier")
+
+	lspconfig["prettier"].setup({
+		bin = 'prettier', -- or `'prettierd'` (v0.22+)
+		filetypes = {
+			"css",
+			"graphql",
+			"html",
+			"javascript",
+			"javascriptreact",
+			"json",
+			"less",
+			"markdown",
+			"scss",
+			"typescript",
+			"typescriptreact",
+			"yaml",
+		},
+	})
+	vim.keymap.set('n', '<leader>l', vim.buf.lsp.format)
+else
+
+	lspconfig.eslint.setup(
+	{
+		capabilities = capabilities,
+		flags = {debounce_text_changes = 500},
+		on_attach = function(client, bufnr)
+			client.server_capabilities.documentFormattingProvider = true
+			on_attach_fn(client, bufnr)
+		end
+	}
+	)
+
+	vim.keymap.set('n', '<leader>l', '<cmd>EslintFixAll<cr>')
+	-- vim.api.nvim_create_autocmd('InsertLeave', {
+		-- 	pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+		-- 	command = 'silent! EslintFixAll',
+		-- 	group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
+		-- })
+end
