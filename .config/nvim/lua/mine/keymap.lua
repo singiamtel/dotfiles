@@ -2,6 +2,7 @@ vim.keymap.set('n', '<SPACE>', '<nop>')
 vim.g.mapleader = ' '
 
 vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u')
+vim.keymap.set('i', '<F1>', '<nop>')
 vim.keymap.set('', '<F1>', '<nop>')
 vim.keymap.set('n', 'Q', '<nop>')
 
@@ -33,6 +34,7 @@ vim.keymap.set('n', '<leader>gf', '<cmd>e <cfile><cr>', { noremap = true, silent
 -- Fugitive
 -- vim.keymap.set('n', '<leader>gs', ':G<CR>')
 -- nnoremap <leader>g :Ag<cr>
+vim.keymap.set('', '<F1>', '<Nop>', { noremap = true, silent = true })
 vim.keymap.set('', '<F2>', '<cmd>lua require("renamer").rename()<cr>', { noremap = true, silent = true })
 vim.keymap.set('', '<F3>', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false})<cr>', { noremap = true, silent = true })
 
