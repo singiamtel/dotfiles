@@ -115,4 +115,7 @@ require('telescope').setup{ defaults = {
 } 
 }
 require('leap').set_default_keymaps()
--- vim.notify = require("notify")
+-- vim.notify = require("notify") -- This is too immature yet
+
+-- Auto close quickfix window on <CR>
+vim.cmd([[autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>]])
