@@ -60,7 +60,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 
 require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all"
-	ensure_installed = "all",
+	ensure_installed = { "bash", "c", "cpp", "css", "dockerfile", "go", "gomod", "graphql", "html", "java", "javascript", "json", "lua", "python", "regex", "rust", "scss", "tsx", "typescript", "yaml" },
 	sync_install = false,
 	auto_install = true,
 
@@ -178,9 +178,9 @@ if vim.fn.filereadable(".prettierrc.json") == 1 then
 	-- 	end,
 	-- })
 	-- vim.lsp.null_ls.setup.timeout_ms = 5000
-	-- local prettier = require("prettier")
+	local prettier = require("prettier")
 
-	lspconfig["prettier"].setup({
+	prettier.setup({
 		bin = 'prettier', -- or `'prettierd'` (v0.22+)
 		filetypes = {
 			"css",
@@ -197,7 +197,7 @@ if vim.fn.filereadable(".prettierrc.json") == 1 then
 			"yaml",
 		},
 	})
-	vim.keymap.set('n', '<leader>l', vim.buf.lsp.format)
+	vim.keymap.set('n', '<leader>l', '<cmd>vim.lsp.buf.format<CR>', opts)
 else
 
 	lspconfig.eslint.setup(
@@ -206,12 +206,12 @@ else
 		flags = {debounce_text_changes = 500},
 		on_attach = function(client, bufnr)
 			client.server_capabilities.documentFormattingProvider = true
+			vim.keymap.set('n', '<leader>l', '<cmd>EslintFixAll<cr>')
 			on_attach_fn(client, bufnr)
 		end
 	}
 	)
 
-	vim.keymap.set('n', '<leader>l', '<cmd>EslintFixAll<cr>')
 	-- vim.api.nvim_create_autocmd('InsertLeave', {
 		-- 	pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
 		-- 	command = 'silent! EslintFixAll',
