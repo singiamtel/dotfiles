@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver", "jdtls", "pyright", "csharp_ls", "omnisharp", "tailwindcss"},
+	ensure_installed = { "tsserver", "jdtls", "pyright", "csharp_ls", "omnisharp", "tailwindcss", "cssls"},
 })
 
 local cmp = require("cmp")
@@ -60,7 +60,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 
 require'nvim-treesitter.configs'.setup {
 	-- A list of parser names, or "all"
-	ensure_installed = { "bash", "c", "cpp", "css", "dockerfile", "go", "gomod", "graphql", "html", "java", "javascript", "json", "lua", "python", "regex", "rust", "scss", "tsx", "typescript", "yaml" },
+	ensure_installed = { "bash", "c", "cpp", "css", "dockerfile", "html", "java", "javascript", "json", "lua", "python", "regex", "rust", "scss", "tsx", "typescript", "yaml" },
 	sync_install = false,
 	auto_install = true,
 
@@ -72,28 +72,14 @@ require'nvim-treesitter.configs'.setup {
 			local max_filesize = 150 * 1024 -- 150 KB
 			local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 			if ok and stats and stats.size > max_filesize then
-				-- return true
+				return true
 			end
 		end,
 		additional_vim_regex_highlighting = false,
 	},
 }
--- vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
-local lspkind = require('lspkind')
-cmp.setup {
-	formatting = {
-		format = lspkind.cmp_format({
-			mode = 'symbol',
-			maxwidth = 50,
-			ellipsis_char = '...',
-			before = function (entry, vim_item)
-				return vim_item
-			end
-		})
-	}
-}
--- require("lsp-format").setup {}
+local builtin = require'telescope.builtin'
 
 local on_attach_fn = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -103,26 +89,28 @@ local on_attach_fn = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gd', builtin.lsp_definitions, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', 'gr', builtin.lsp_references, bufopts)
 end
 
 local lspconfig = require('lspconfig')
+
 lspconfig['pyright'].setup{
 	on_attach = on_attach,
 	flags = lsp_flags,
 }
+
 lspconfig['tsserver'].setup{
 	on_attach = function(client, bufnr)
 		on_attach_fn(client, bufnr)
@@ -131,6 +119,11 @@ lspconfig['tsserver'].setup{
 	flags = lsp_flags,
 }
 lspconfig['jdtls'].setup{
+	on_attach = on_attach_fn,
+	flags = lsp_flags,
+}
+
+lspconfig['cssls'].setup{
 	on_attach = on_attach_fn,
 	flags = lsp_flags,
 }
@@ -151,13 +144,16 @@ lspconfig["csharp_ls"].setup(
 }
 )
 
-lspconfig["tailwindcss"].setup(
-{
-	capabilities = capabilities,
-	on_attach = on_attach_fn,
-	flags = lsp_flags,
-}
-)
+-- If extension is jsx/tsx then use typescript-language-server
+if vim.bo.filetype == "javascriptreact" or vim.bo.filetype == "typescriptreact" then
+	lspconfig["tailwindcss"].setup(
+	{
+		capabilities = capabilities,
+		on_attach = on_attach_fn,
+		flags = lsp_flags,
+	}
+	)
+end
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -197,7 +193,7 @@ if vim.fn.filereadable(".prettierrc.json") == 1 then
 			"yaml",
 		},
 	})
-	vim.keymap.set('n', '<leader>l', '<cmd>vim.lsp.buf.format<CR>', opts)
+	vim.keymap.set('n', '<leader>l', vim.lsp.buf.format, opts)
 else
 
 	lspconfig.eslint.setup(
