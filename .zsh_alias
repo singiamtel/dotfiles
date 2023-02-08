@@ -5,7 +5,7 @@ alias -g cover="~/CV/Cover\ Letters/"
 
 # Shortcuts
 alias e="nvim"
-alias v="nvim"
+alias v="e"
 alias vi="nvim"
 alias vim="nvim"
 alias cfv="nvim ~/.config/nvim/lua/mine"
@@ -25,10 +25,12 @@ alias todo='vim -c VimwikiIndex'
 alias calc="python -i ~/.config/math_mode.py"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias lg="lazygit"
 alias t="tmux new-session -A -s main"
+alias t2="tmux new-session -A -s secondary"
 alias dragon="dragon-drop"
 alias ex="(dolphin .  & disown) > /dev/null 2>&1"
+alias gd="git difftool"
+alias workfox="firefox --no-remote -P work --class=secondclass"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"

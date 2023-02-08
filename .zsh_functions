@@ -42,3 +42,15 @@ function -auto-ls-after-cd() {
   fi
 }
 add-zsh-hook chpwd -auto-ls-after-cd
+
+lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=/tmp/lazygitnewdir
+
+    lazygit "$@"
+
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
