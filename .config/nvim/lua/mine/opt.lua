@@ -108,7 +108,8 @@ require("nvim-tree").setup({
 	},
 })
 require('telescope').setup{ defaults = { 
-	file_ignore_patterns = { "node_modules", ".git", "test", "data/mods" },
+	file_ignore_patterns = { "node_modules", ".git"},
+	-- file_ignore_patterns = { "node_modules", ".git", "test", "data/mods" },
 	layout_config = {
 		preview_width = 60,
 	},
