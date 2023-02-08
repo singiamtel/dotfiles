@@ -29,7 +29,20 @@ vim.keymap.set('n', '<leader>f', builtin.find_files)
 vim.keymap.set('n', '<leader>g', builtin.live_grep)
 vim.keymap.set('n', '<leader>b', builtin.buffers)
 vim.keymap.set('n', '<leader>e', builtin.diagnostics)
+vim.keymap.set('n', '<leader>s', '<cmd>set spell!<CR>')
 vim.keymap.set('n', '<leader>gf', '<cmd>e <cfile><cr>', { noremap = true, silent = true })
+
+-- Center on mark jump 
+vim.keymap.set('n', '\'1', '\'1zzzv')
+vim.keymap.set('n', '\'2', '\'2zzzv')
+vim.keymap.set('n', '\'3', '\'3zzzv')
+vim.keymap.set('n', '\'4', '\'4zzzv')
+vim.keymap.set('n', '\'5', '\'5zzzv')
+vim.keymap.set('n', '\'6', '\'6zzzv')
+vim.keymap.set('n', '\'7', '\'7zzzv')
+vim.keymap.set('n', '\'8', '\'8zzzv')
+vim.keymap.set('n', '\'9', '\'9zzzv')
+
 
 -- Fugitive
 -- vim.keymap.set('n', '<leader>gs', ':G<CR>')
