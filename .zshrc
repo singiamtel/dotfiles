@@ -27,6 +27,7 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f "$HOME/.zsh_alias" ] && source $HOME/.zsh_alias
 [ -f "$HOME/.zsh_functions" ] && source $HOME/.zsh_functions
+[ -f "$HOME/.zsh_local_alias" ] && source $HOME/.zsh_local_alias
 
 # Vim mode
 bindkey -v
@@ -64,5 +65,7 @@ enable-fzf-tab
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH=/home/sergio/.fnm:$PATH
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin/scripts
 eval "`fnm env`"
 # zprof
