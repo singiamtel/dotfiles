@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# https://github.com/kepkin/dev-shell-essentials/blob/master/highlight.sh
+
 declare -A fg_color_map
 fg_color_map[black]=30
 fg_color_map[red]=31
