@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Generate a report of all the commits I've made on a given day on all of the specified repositories.
+
+set -o errexit
+
+# Usage: gen_report.sh <date>
+
+function date_to_before_after {
+	set -o errexit
+	# Convert a date to that date at 00:00:00 and the next day at 00:00:00
+	local date=$@
+	parsedDate=$(date -d "$date")
+	before=$(date -d "$parsedDate" +%Y-%m-%dT00:00:00)
+	after=$(date -d "$parsedDate + 1 day" +%Y-%m-%dT00:00:00)
+	echo "$before $after"
+}
+
+repos=($(find ~/work/code -name .git -type d | sed 's/\/.git//'))
+
+date=$@
+before_after=$(date_to_before_after $date)
+before=$(echo $before_after | cut -d ' ' -f 1)
+after=$(echo $before_after | cut -d ' ' -f 2)
+
+for repo in ${repos[@]}; do
+	cd $repo
+	# Get all commits made by me on the given day, and highlight the commit message based on the commit type.
+	# This assumes that the commit message is of the form: <type>(<scope>): <message> as specified by conventionalcommits.org
+	work=$(git --no-pager log --oneline --after=$before --before=$after --author=$(whoami) --decorate --graph --color=always | hl cyan 'fix\(?.*?\)?:' | hl green 'feat\(?.*?\)?:' | hl blue 'chore\(?.*?\)?:' | hl yellow 'docs\(?.*?\)?:' | hl magenta 'test\(?.*?\)?:' | hl magenta 'refactor\(?.*?\)?:' | hl red 'revert\(?.*?\)?:' | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch" | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch")
+	if [ -n "$work" ]; then
+		echo "Repo: $(git remote -v | head -n 1 | awk '{print $2}' | sed 's/.*\///' | sed 's/\.git//')"
+		echo -e "$work"
+		echo # Blank line
+	fi
+done
