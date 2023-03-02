@@ -43,7 +43,6 @@ alias sudo='sudo '
 alias cal='cal --monday'
 alias ip='ip --color=always'
 alias mv="mv -i"
-alias find="find -prune"
 
 # Youtube
 alias yt="yt-dlp --add-metadata -i" # Download video link
