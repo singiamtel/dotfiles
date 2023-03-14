@@ -7,9 +7,30 @@ set -o errexit
 # Usage: gen_report.sh <date>
 
 function date_to_before_after {
+	# log before and after dates to stderr
 	set -o errexit
 	# Convert a date to that date at 00:00:00 and the next day at 00:00:00
 	local date=$@
+	# if date is "week" or "last week", get the range of dates for that week
+	if [ "$date" == "week" ] || [ "$date" == "last week" ]; then
+		parsedDate=$(date)
+		# echo "parsedDate: $parsedDate" >&2
+		if [ "$date" == "last week" ]; then
+			parsedDate=$(date -d "$parsedDate - 7 days")
+		fi
+		# echo "parsedDate: $parsedDate" >&2
+		# get last monday if parsedDate is not a monday
+		if [ $(date -d "$parsedDate" +%u) -ne 1 ]; then
+			while [ $(date -d "$parsedDate" +%u) -ne 1 ]; do
+				parsedDate=$(date -d "$parsedDate - 1 day")
+			done
+		fi
+		before=$(date -d "$parsedDate" +%Y-%m-%dT00:00:00)
+		after=$(date -d "$parsedDate + 6 days" +%Y-%m-%dT00:00:00)
+		echo "$before $after"
+		echo "Running in week mode between $(date -d "$before" +%m-%d) and $(date -d "$after" +%m-%d)" >&2
+		return
+	fi
 	parsedDate=$(date -d "$date")
 	before=$(date -d "$parsedDate" +%Y-%m-%dT00:00:00)
 	after=$(date -d "$parsedDate + 1 day" +%Y-%m-%dT00:00:00)
@@ -25,9 +46,15 @@ after=$(echo $before_after | cut -d ' ' -f 2)
 
 for repo in ${repos[@]}; do
 	cd $repo
+	# If date is "week", also show the commit date in the output
+	if [ "$date" == "week" ]; then
+		extra_args="--date=short"
+	else
+		extra_args=""
+	fi
 	# Get all commits made by me on the given day, and highlight the commit message based on the commit type.
 	# This assumes that the commit message is of the form: <type>(<scope>): <message> as specified by conventionalcommits.org
-	work=$(git --no-pager log --oneline --after=$before --before=$after --author=$(whoami) --decorate --graph --color=always | hl cyan 'fix\(?.*?\)?:' | hl green 'feat\(?.*?\)?:' | hl blue 'chore\(?.*?\)?:' | hl yellow 'docs\(?.*?\)?:' | hl magenta 'test\(?.*?\)?:' | hl magenta 'refactor\(?.*?\)?:' | hl red 'revert\(?.*?\)?:' | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch" | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch")
+	work=$(git --no-pager log --oneline --after=$before --before=$after --pretty=oneline --author=$(whoami) --decorate --color=always $extra_args | hl cyan 'fix\(?.*?\)?: ' | hl green 'feat\(?.*?\)?: ' | hl blue 'chore\(?.*?\)?: ' | hl yellow 'docs\(?.*?\)?: ' | hl magenta 'test\(?.*?\)?: ' | hl magenta 'refactor\(?.*?\)?: ' | hl red 'revert\(?.*?\)?: ' | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch" | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch")
 	if [ -n "$work" ]; then
 		echo "Repo: $(git remote -v | head -n 1 | awk '{print $2}' | sed 's/.*\///' | sed 's/\.git//')"
 		echo -e "$work"
