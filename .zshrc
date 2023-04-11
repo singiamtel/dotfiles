@@ -21,6 +21,7 @@ plugins=(
 	z
 	fzf-tab
 	zsh-autosuggestions
+	zsh-fzf-history-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -34,8 +35,8 @@ bindkey -v
 
 bindkey '^e' edit-command-line
 
-bindkey -M viins '^R' history-incremental-pattern-search-backward
-bindkey -M viins '^F' history-incremental-pattern-search-forward
+bindkey -M viins '^R' fzf_history_search
+# bindkey -M viins '^F' history-incremental-pattern-search-forward
 bindkey "^?" backward-delete-char
 
 # Changes cursor to fit vi mode
@@ -59,6 +60,8 @@ echo -ne "\e[5 q"
 zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 
 enable-fzf-tab
 
