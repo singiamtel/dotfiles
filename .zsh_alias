@@ -8,6 +8,7 @@ alias e="nvim"
 alias v="e"
 alias vi="nvim"
 alias vim="nvim"
+alias f='nvim $(fzf)'
 alias cfv="nvim ~/.config/nvim/lua/mine"
 alias SS="sudo systemctl"
 alias r="ranger"
@@ -20,8 +21,6 @@ alias cleartex="rm *.aux *.dvi *.log"
 alias dotf="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias virc="e $HOME/.config/nvim/init.vim"
 alias fatvi="e -u $HOME/.config/fat-nvim/init.vim"
-alias ww='vim -c VimwikiIndex'
-alias todo='vim -c VimwikiIndex'
 alias calc="python -i ~/.config/math_mode.py"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME"
@@ -43,6 +42,7 @@ alias sudo='sudo '
 alias cal='cal --monday'
 alias ip='ip --color=always'
 alias mv="mv -i"
+alias grep="grep -E" # Who even knows normal grep
 
 # Youtube
 alias yt="yt-dlp --add-metadata -i" # Download video link
@@ -60,4 +60,3 @@ alias sdn="sudo shutdown now"
 alias ghc="ghc -dynamic"
 
 alias defenestrate="rm -rf"
-
