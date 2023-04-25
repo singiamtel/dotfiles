@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Generate a report of all the commits I've made on a given day on all of the specified repositories.
 # Usage: gen_report.sh <date>

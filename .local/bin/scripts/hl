@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # https://github.com/kepkin/dev-shell-essentials/blob/master/highlight.sh
 
