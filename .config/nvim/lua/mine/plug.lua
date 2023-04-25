@@ -16,8 +16,12 @@ return require('packer').startup(function(use)
 	}
 
 	use 'ggandor/leap.nvim'
+	use 'gko/vim-coloresque'
 
 	-- use 'wellle/context.vim'
+
+	-- Some kind of statistics thing
+	use 'wakatime/vim-wakatime'
 
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-buffer'
