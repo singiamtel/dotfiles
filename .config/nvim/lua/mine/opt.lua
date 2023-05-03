@@ -1,5 +1,10 @@
 vim.opt.backspace="indent,eol,start"
-vim.opt.clipboard="unnamedplus"
+vim.g.python3_host_prog = '/opt/homebrew/Caskroom/miniconda/base/bin/python' -- Damn python
+if vim.loop.os_uname().sysname == "Darwin" then
+	vim.opt.clipboard="unnamed"
+else
+	vim.opt.clipboard="unnamedplus"
+end
 vim.opt.completeopt="menu,menuone,noselect"
 vim.opt.conceallevel=2
 vim.opt.confirm = false
@@ -87,17 +92,21 @@ vim.cmd('autocmd BufNewFile,BufRead *astro set ft=astro')
 vim.cmd("let g:AutoPairs = {'(':')', '[':']', '{':'}'}")
 vim.cmd("let g:context_max_height = 3")
 
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
+local function on_tree_attach(bufnr)
+  local api = require('nvim-tree.api')
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+  vim.keymap.set('n', 'u', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set('n', '<CR>',  api.node.open.edit, opts('Open'))
+end
 require("nvim-tree").setup({
 	sort_by = "case_sensitive",
+	on_attach = on_tree_attach,
+    actions = { open_file = { quit_on_open = true, }, },
 	view = {
 		adaptive_size = true,
-		mappings = {
-			list = {
-				{ key = "u", action = "dir_up" },
-			},
-		},
 	},
 	renderer = {
 		group_empty = true,

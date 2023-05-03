@@ -35,7 +35,10 @@ return require('packer').startup(function(use)
 	use 'github/copilot.vim'
 	use "MunifTanjim/nui.nvim"
 	use "rcarriga/nvim-notify"
-	-- use("folke/noice.nvim")
+	--
+
+
+	use("folke/noice.nvim")
 	use('jose-elias-alvarez/null-ls.nvim')
 	use('MunifTanjim/prettier.nvim')
 

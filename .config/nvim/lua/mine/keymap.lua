@@ -1,35 +1,35 @@
-vim.keymap.set('n', '<SPACE>', '<nop>')
+vim.keymap.set('n', '<SPACE>', '<nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 
-vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u')
-vim.keymap.set('i', '<F1>', '<nop>')
-vim.keymap.set('', '<F1>', '<nop>')
-vim.keymap.set('n', 'Q', '<nop>')
+vim.keymap.set('i', '<C-l>', '<c-g>u<Esc>[s1z=`]a<c-g>u', { noremap = true, silent = true })
+vim.keymap.set('i', '<F1>', '<nop>', { noremap = true, silent = true })
+vim.keymap.set('', '<F1>', '<nop>', { noremap = true, silent = true })
+vim.keymap.set('n', 'Q', '<nop>', { noremap = true, silent = true })
 
 -- Center search
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
+vim.keymap.set('n', 'n', 'nzzzv', { noremap = true, silent = true })
+vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true })
 
-vim.keymap.set('n', ',', '<Plug>(matchup-%)')
+vim.keymap.set('n', ',', '<Plug>(matchup-%)', { noremap = true, silent = true })
 
-vim.keymap.set('n', 'qq', ':bd<CR>')
-vim.keymap.set('', '<C-h>', '<C-w>h')
-vim.keymap.set('', '<C-j>', '<C-w>j')
-vim.keymap.set('', '<C-k>', '<C-w>k')
-vim.keymap.set('', '<C-l>', '<C-w>l')
+vim.keymap.set('n', 'qq', ':bd<CR>', { noremap = true, silent = true })
+vim.keymap.set('', '<C-h>', '<C-w>h', { noremap = true, silent = true })
+vim.keymap.set('', '<C-j>', '<C-w>j', { noremap = true, silent = true })
+vim.keymap.set('', '<C-k>', '<C-w>k', { noremap = true, silent = true })
+vim.keymap.set('', '<C-l>', '<C-w>l', { noremap = true, silent = true })
 
-vim.keymap.set('', '<C-n>', ':NvimTreeToggle<CR>')
+vim.keymap.set('', '<C-n>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
-vim.keymap.set('n', '<leader>a', '<c-^>')
-vim.keymap.set('n', '<leader>gl', ':diffget //2<CR>')
-vim.keymap.set('n', '<leader>gr', ':diffget //3<CR>')
+vim.keymap.set('n', '<leader>a', '<c-^>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gl', ':diffget //2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>gr', ':diffget //3<CR>', { noremap = true, silent = true })
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>f', builtin.find_files)
-vim.keymap.set('n', '<leader>g', builtin.live_grep)
-vim.keymap.set('n', '<leader>b', builtin.buffers)
-vim.keymap.set('n', '<leader>e', builtin.diagnostics)
-vim.keymap.set('n', '<leader>s', '<cmd>set spell!<CR>')
+vim.keymap.set('n', '<leader>f', builtin.find_files, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>g', builtin.live_grep, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>b', builtin.buffers, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>e', builtin.diagnostics, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>s', '<cmd>set spell!<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>gf', '<cmd>e <cfile><cr>', { noremap = true, silent = true })
 
 -- Center on mark jump 

@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "tsserver", "jdtls", "pyright", "csharp_ls", "omnisharp", "tailwindcss", "cssls"},
+	ensure_installed = { "tsserver", "jdtls", "pyright","omnisharp", "tailwindcss", "cssls"},
 })
 
 local cmp = require("cmp")
