@@ -7,6 +7,12 @@ repos=($(find ~/work/code -name .git -type d | sed 's/\/.git//'))
 # My PC username is usually the same as what I sign my commits with
 ME=$(whoami)
 
+# If using macOS, use gdate instead of date
+if [ "$(uname)" == "Darwin" ]; then
+	shopt -s expand_aliases
+	alias date="gdate"
+fi
+
 set -o errexit
 
 # TODO: This function is horrible, not sure how to make it better though
@@ -51,10 +57,12 @@ after=$(echo $before_after | cut -d ' ' -f 2)
 for repo in ${repos[@]}; do
 	cd $repo
 	# Tested with git 2.39.2
-	work=$(git --no-pager log --oneline --after=$before --before=$after --pretty=oneline --author=$ME --decorate --color=always $extra_args | hl cyan 'fix\(?.*?\)?: ' | hl green 'feat\(?.*?\)?: ' | hl blue 'chore\(?.*?\)?: ' | hl yellow 'docs\(?.*?\)?: ' | hl magenta 'test\(?.*?\)?: ' | hl magenta 'refactor\(?.*?\)?: ' | hl red 'revert\(?.*?\)?: ' | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch" | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch")
+	work=$(git --no-pager log --oneline --pretty=oneline --author=$ME --decorate --color=always $extra_args | head | hl cyan 'fix\(?.*?\)?: ' | hl green 'feat\(?.*?\)?: ' | hl blue 'chore\(?.*?\)?: ' | hl yellow 'docs\(?.*?\)?: ' | hl magenta 'test\(?.*?\)?: ' | hl magenta 'refactor\(?.*?\)?: ' | hl red 'revert\(?.*?\)?: ' | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch" | hl red "Merge branch" | hl red "Merge pull request" | hl red "Merge remote-tracking branch")
 	if [ -n "$work" ]; then
+		git remote -v
 		echo "Repo: $(git remote -v | head -n 1 | awk '{print $2}' | sed 's/.*\///' | sed 's/\.git//')"
 		echo -e "$work"
 		echo # Blank line
+		exit 0
 	fi
 done

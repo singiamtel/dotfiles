@@ -31,6 +31,7 @@ alias dragon="dragon-drop"
 alias ex="(dolphin .  & disown) > /dev/null 2>&1"
 alias gd="git difftool"
 alias workfox="firefox --no-remote -P work --class=secondclass"
+alias md="frogmouth"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"

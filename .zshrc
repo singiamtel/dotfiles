@@ -16,13 +16,46 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 setopt autocd autopushd pushdignoredups histignorealldups numericglobsort appendhistory extendedglob
 
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+	eval "$__conda_setup"
+else
+	if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+# . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"  # commented out by conda initialize
+	else
+		export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+	fi
+fi
+unset __conda_setup
+if [ `uname -m` = "x86_64" ]; then
+	conda activate 86_env
+fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/sergio/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/sergio/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/Users/sergio/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/sergio/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
 plugins=(
+	asdf
+	fzf-tab
 	git
 	z
-	fzf-tab
 	zsh-autosuggestions
-	zsh-syntax-highlighting
 	zsh-fzf-history-search
+	zsh-syntax-highlighting
+  autoswitch_virtualenv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -53,6 +86,8 @@ elif [[ ${KEYMAP} == main ]] ||
 fi
 }
 
+. "$HOME/.asdf/asdf.sh"
+
 zle -N zle-keymap-select
 zle-line-init() {
 zle -K viins # initiate `vi insert` as keymap
@@ -66,25 +101,11 @@ export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 
 enable-fzf-tab
 
-export PATH=/home/sergio/.fnm:$PATH
+# export PATH=/home/sergio/.fnm:$PATH
+# eval "`fnm env`"
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/scripts
-eval "`fnm env`"
 # zprof
 
 
 
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-	eval "$__conda_setup"
-else
-	if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-		. "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-	else
-		export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
-	fi
-fi
-unset __conda_setup
-if [ `uname -m` = "x86_64" ]; then
-	conda activate 86_env
-fi
