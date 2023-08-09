@@ -98,7 +98,7 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+# export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore'
 
 enable-fzf-tab
 
