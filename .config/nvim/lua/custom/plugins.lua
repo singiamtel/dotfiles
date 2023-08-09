@@ -70,6 +70,7 @@ local plugins = {
         config = function()
           require("copilot_cmp").setup()
         end,
+        event = "InsertEnter",
       },
     },
     opts = {

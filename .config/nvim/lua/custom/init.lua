@@ -8,3 +8,6 @@
 
 
 vim.cmd("autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o")
+
+vim.g.loaded_python3_provider = nil
+vim.g.python3_host_prog =  '~/.asdf/installs/python/3.10.12/bin/python'
