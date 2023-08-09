@@ -1,0 +1,31 @@
+[init]
+	defaultBranch = master
+[diff]
+        tool = difftastic
+[difftool]
+        prompt = false
+[difftool "difftastic"]
+        cmd = difft "$LOCAL" "$REMOTE"
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[push]
+	autoSetupRemote = true
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
+[pull]
+	rebase = false
+[core]
+	pager = less -F -X
+	excludesfile = $HOME/.gitignore
+[alias]
+	dt = difftool
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[include]
+    path= ~/.gitconfig_local
