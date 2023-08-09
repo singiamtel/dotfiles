@@ -4,8 +4,8 @@ This repository keeps all of the config files I use on my workflow
 
 ## Installation requirements
 
-- neovim + Vim-Plug: https://github.com/junegunn/vim-plug
-- zsh + Oh-My-Zsh: https://github.com/ohmyzsh/ohmyzsh
+- neovim + [NvChad](https://nvchad.com)
+- zsh + [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```bash
 echo ".cfg" >> .gitignore
