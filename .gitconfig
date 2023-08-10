@@ -19,7 +19,7 @@
 	rebase = false
 [core]
 	pager = less -F -X
-	excludesfile = $HOME/.gitignore
+	excludesFile = ~/.gitignore
 [alias]
 	dt = difftool
 [filter "lfs"]
