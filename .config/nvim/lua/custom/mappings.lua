@@ -9,7 +9,10 @@ M.general = {
 
 M.telescope = {
   n = {
-    ["<leader>fe"] = { "<cmd> Telescope diagnostics <CR>", "Diagnostics" },
+    ["<leader>e"] = { "<cmd> Telescope diagnostics <CR>", "Diagnostics" },
+    -- ["<leader>f"] = { "<cmd> Telescope find_files <CR>", "Find files" },
+    ["<leader>g"] = { "<cmd> Telescope live_grep <CR>", "Grep" },
+    ["<F3>"] = { "<cmd> Telescope live_grep <CR>", "Grep" },
   },
 }
 
