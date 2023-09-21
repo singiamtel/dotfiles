@@ -20,4 +20,8 @@ vim.cmd([[
   nnoremap # #zz
   nnoremap g* g*zz
   nnoremap g# g#zz
+  command WQ wq
+  command Wq wq
+  command W w
+  command Q q
 ]])
