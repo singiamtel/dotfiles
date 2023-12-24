@@ -105,6 +105,14 @@ local plugins = {
   {
     "Afourcat/treesitter-terraform-doc.nvim",
   },
+  {
+    "ldelossa/gh.nvim",
+    dependencies = { { "ldelossa/litee.nvim" } },
+  },
+  {
+    "almo7aya/openingh.nvim",
+    lazy = false,
+  },
 
   -- To make a plugin not be loaded
   -- {
