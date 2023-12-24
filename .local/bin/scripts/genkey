@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Ensure you have ssh-keygen and ssh-copy-id installed
+
+# Check if an SSH host is provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 user@hostname"
+    exit 1
+fi
+
+SSH_HOST=$1                 # SSH host provided as an argument
+KEY_NAME=id_rsa_custom      # Name of the SSH key
+
+# Generate a new SSH key without a passphrase
+ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/$KEY_NAME
+
+# Copy the SSH key to the server
+ssh-copy-id -i ~/.ssh/$KEY_NAME.pub $SSH_HOST
+
+echo "SSH key generated and copied to $SSH_HOST"
