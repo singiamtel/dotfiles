@@ -106,4 +106,5 @@ enable-fzf-tab
 # eval "`fnm env`"
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/scripts
+export PATH=$PATH:$HOME/.local/bin/scripts/shawnwn
 # zprof
