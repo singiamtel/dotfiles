@@ -113,6 +113,16 @@ local plugins = {
     "almo7aya/openingh.nvim",
     lazy = false,
   },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+    config = function()
+      require("treesitter-context").setup {
+        max_lines = 4,
+        trim_scope = 'outer',
+      }
+    end,
+  },
 
   -- To make a plugin not be loaded
   -- {
