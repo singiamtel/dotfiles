@@ -8,6 +8,7 @@
 
 
 vim.cmd("autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o")
+vim.cmd("set nrformats+=alpha")
 
 vim.g.loaded_python3_provider = nil
 vim.opt.splitkeep = 'screen'
