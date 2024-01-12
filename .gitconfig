@@ -1,9 +1,9 @@
 [init]
 	defaultBranch = master
 [diff]
-        tool = difftastic
+  tool = difftastic
 [difftool]
-        prompt = false
+  prompt = false
 [difftool "difftastic"]
         cmd = difft "$LOCAL" "$REMOTE"
 [merge]
@@ -13,8 +13,6 @@
 	prompt = false
 [push]
 	autoSetupRemote = true
-[includeIf "gitdir:~/work/"]
-    path = ~/work/.gitconfig
 [pull]
 	rebase = false
 [core]
@@ -22,12 +20,11 @@
 	excludesFile = ~/.gitignore
 [alias]
 	dt = difftool
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[include]
+[include] # Not in repo
     path= ~/.gitconfig_local
-[commit]
+[commit] # Show diff in commit message
 	verbose = true
+[url "git@github.com:"] # So good
+	insteadOf = https://github.com/
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
