@@ -13,6 +13,12 @@ M.telescope = {
     -- ["<leader>f"] = { "<cmd> Telescope find_files <CR>", "Find files" },
     ["<leader>g"] = { "<cmd> Telescope live_grep <CR>", "Grep" },
     ["<F3>"] = { "<cmd> Telescope live_grep <CR>", "Grep" },
+    ["<leader>fm"] = {
+      function()
+        require("conform").format()
+      end,
+      "formatting",
+    }
   },
 }
 
