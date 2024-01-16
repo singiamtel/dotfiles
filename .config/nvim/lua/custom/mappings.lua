@@ -14,10 +14,8 @@ M.telescope = {
     ["<leader>g"] = { "<cmd> Telescope live_grep <CR>", "Grep" },
     ["<F3>"] = { "<cmd> Telescope live_grep <CR>", "Grep" },
     ["<leader>fm"] = {
-      function()
-        require("conform").format()
-      end,
-      "formatting",
+      "<cmd> FormatWrite<CR>",
+      "Run formatter",
     }
   },
 }

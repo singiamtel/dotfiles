@@ -21,16 +21,84 @@ local plugins = {
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
+  -- {
+  --   "stevearc/conform.nvim",
+  --   --  for users those who want auto-save conform + lazyloading!
+  --   -- event = "BufWritePre"
+  --   lazy = false,
+  --   config = function()
+  --     require "custom.configs.conform"
+  --   end,
+  -- },
   {
-    "stevearc/conform.nvim",
-    --  for users those who want auto-save conform + lazyloading!
-    -- event = "BufWritePre"
-    lazy = false,
+    "mhartington/formatter.nvim",
     config = function()
-      require "custom.configs.conform"
-    end,
-  },
+      local util = require "formatter.util"
 
+      local function eslint_d()
+        print "eslint_d"
+        return {
+          exe = "eslint_d",
+          args = {
+            "--stdin",
+            "--stdin-filename",
+            util.escape_path(util.get_current_buffer_file_path()),
+            "--fix-to-stdout",
+          },
+          stdin = true,
+          try_node_modules = true,
+        }
+      end
+      local function prettier()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)) },
+          stdin = true,
+        }
+      end
+      require("formatter").setup {
+        logging = true,
+        -- logging_level = "info",
+        filetype = {
+          json = { prettier },
+          html = { prettier },
+          css = { prettier },
+          javascript = { eslint_d },
+          typescript = { eslint_d },
+          javascriptreact = { eslint_d },
+          typescriptreact = { eslint_d },
+          lua = {
+            -- "formatter.filetypes.lua" defines default configurations for the
+            -- "lua" filetype
+            require("formatter.filetypes.lua").stylua,
+
+            -- You can also define your own configuration
+            function()
+              -- Supports conditional formatting
+              if util.get_current_buffer_file_name() == "special.lua" then
+                return nil
+              end
+
+              -- Full specification of configurations is down below and in Vim help
+              -- files
+              return {
+                exe = "stylua",
+                args = {
+                  "--search-parent-directories",
+                  "--stdin-filepath",
+                  util.escape_path(util.get_current_buffer_file_path()),
+                  "--",
+                  "-",
+                },
+                stdin = true,
+              }
+            end,
+          },
+        },
+      }
+    end,
+    lazy = false,
+  },
   -- override plugin configs
   {
     "williamboman/mason.nvim",
@@ -128,8 +196,49 @@ local plugins = {
     config = function()
       require("treesitter-context").setup {
         max_lines = 4,
-        trim_scope = 'outer',
+        trim_scope = "outer",
       }
+    end,
+  },
+  {
+    "stevearc/overseer.nvim",
+    lazy = false,
+    config = function()
+      require("overseer").setup {
+        component_aliases = {
+          -- Most tasks are initialized with the default components
+          default = {
+            { "display_duration", detail_level = 2 },
+            "on_output_summarize",
+            { "on_output_quickfix", open = true },
+            "on_exit_set_status",
+            "on_complete_notify",
+            "on_complete_dispose",
+            "on_result_diagnostics",
+            "on_result_diagnostics_quickfix",
+          },
+          -- Tasks from tasks.json use these components
+          default_vscode = {
+            "default",
+            "on_result_diagnostics",
+            "on_result_diagnostics_quickfix",
+          },
+        },
+      }
+    end,
+  },
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
+  {
+    "rcarriga/nvim-notify",
+  },
+  {
+    "yorickpeterse/nvim-pqf",
+    lazy = false,
+    config = function()
+      require("pqf").setup()
     end,
   },
 

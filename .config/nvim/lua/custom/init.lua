@@ -25,4 +25,7 @@ vim.cmd([[
   command Wq wq
   command W w
   command Q q
+  autocmd FileType typescript let b:dispatch = 'npm run build'
+  set noswapfile
 ]])
+
