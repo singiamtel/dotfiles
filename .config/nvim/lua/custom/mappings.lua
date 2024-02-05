@@ -16,7 +16,8 @@ M.telescope = {
     ["<leader>fm"] = {
       "<cmd> FormatWrite<CR>",
       "Run formatter",
-    }
+    },
+    
   },
 }
 

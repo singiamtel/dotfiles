@@ -6,15 +6,14 @@
 --   command = "tabdo wincmd =",
 -- })
 
-
-vim.cmd("autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o")
-vim.cmd("set nrformats+=alpha")
+vim.cmd "autocmd FileType * set formatoptions-=c formatoptions-=r formatoptions-=o"
+vim.cmd "set nrformats+=alpha"
 
 vim.g.loaded_python3_provider = nil
-vim.opt.splitkeep = 'screen'
-vim.g.python3_host_prog =  '~/.asdf/installs/python/3.10.12/bin/python'
+vim.opt.splitkeep = "screen"
+vim.g.python3_host_prog = "~/.asdf/installs/python/3.10.12/bin/python"
 
-vim.cmd([[
+vim.cmd [[
   nnoremap n nzz
   nnoremap N Nzz
   nnoremap * *zz
@@ -27,5 +26,6 @@ vim.cmd([[
   command Q q
   autocmd FileType typescript let b:dispatch = 'npm run build'
   set noswapfile
-]])
-
+  " autocmd CursorHold * lua vim.diagnostic.open_float()
+  au BufReadPost *.njk set filetype=html
+]]
