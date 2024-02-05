@@ -26,5 +26,5 @@
 	verbose = true
 [url "git@github.com:"] # So good
 	insteadOf = https://github.com/
-[includeIf "gitdir:~/work/"]
-    path = ~/work/.gitconfig
+; [includeIf "gitdir:~/work/"]
+;     path = ~/work/.gitconfig
