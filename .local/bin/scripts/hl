@@ -1,39 +1,18 @@
 #!/usr/bin/env bash
 
-# https://github.com/kepkin/dev-shell-essentials/blob/master/highlight.sh
+function highlight() {
+	declare -A fg_color_map
+	fg_color_map[black]=30
+	fg_color_map[red]=31
+	fg_color_map[green]=32
+	fg_color_map[yellow]=33
+	fg_color_map[blue]=34
+	fg_color_map[magenta]=35
+	fg_color_map[cyan]=36
+	 
+	fg_c=$(echo -e "\e[1;${fg_color_map[$1]}m")
+	c_rs=$'\e[0m'
+	sed -u s"/$2/$fg_c$2$c_rs/g"
+}
 
-# Define color codes
-COLOR_RED="\033[0;31m"
-COLOR_GREEN="\033[0;32m"
-COLOR_YELLOW="\033[0;33m"
-COLOR_BLUE="\033[0;34m"
-COLOR_PURPLE="\033[0;35m"
-COLOR_CYAN="\033[0;36m"
-COLOR_RESET="\033[0m"
-
-# Check if both arguments are provided
-if [ $# -ne 2 ]; then
-  echo "Usage: $0 COLOR STRING"
-  exit 1
-fi
-
-# Assign the arguments to variables
-COLOR="$1"
-STRING="$2"
-
-# Check if the provided color is valid
-case "$COLOR" in
-  red) COLOR_CODE="$COLOR_RED";;
-  green) COLOR_CODE="$COLOR_GREEN";;
-  yellow) COLOR_CODE="$COLOR_YELLOW";;
-  blue) COLOR_CODE="$COLOR_BLUE";;
-  purple) COLOR_CODE="$COLOR_PURPLE";;
-  cyan) COLOR_CODE="$COLOR_CYAN";;
-  *)
-    echo "Invalid color. Available colors: red, green, yellow, blue, purple, cyan"
-    exit 1
-    ;;
-esac
-
-# Highlight the string with the provided color
-echo -e "$COLOR_CODE$STRING$COLOR_RESET"
+highlight $@
