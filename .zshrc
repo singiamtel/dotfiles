@@ -4,6 +4,8 @@ ZSH_THEME="ys"
 DISABLE_UPDATE_PROMPT=true
 DISABLE_AUTO_UPDATE="true"
 
+. "$HOME/.asdf/asdf.sh"
+
 fpath+=~/.zfunc
 autoload edit-command-line; zle -N edit-command-line
 autoload -Uz compinit && compinit
@@ -16,7 +18,6 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 setopt autocd autopushd pushdignoredups histignorealldups numericglobsort appendhistory extendedglob
 
-. "$HOME/.asdf/asdf.sh"
 
 # __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 # if [ $? -eq 0 ]; then
