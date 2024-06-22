@@ -2,6 +2,7 @@
 	defaultBranch = master
 [diff]
   tool = difftastic
+	; external = nvim -c \"set ft=git\" -
 [difftool]
   prompt = false
 [difftool "difftastic"]
@@ -15,17 +16,46 @@
 	autoSetupRemote = true
 [pull]
 	rebase = false
-[core]
-	pager = less -F -X
-	excludesFile = ~/.gitignore
 [alias]
 	dt = difftool
 	bb = !better-git-branch.sh
+	bl = blame -w -C -C -C
 [include] # Not in repo
     path= ~/.gitconfig_local
 [commit] # Show diff in commit message
 	verbose = true
 [url "git@github.com:"] # So good
 	insteadOf = https://github.com/
-; [includeIf "gitdir:~/work/"]
-;     path = ~/work/.gitconfig
+
+[blame]
+    date = relative
+[color "blame"]
+    highlightRecent = 237, 20 month ago, 238, 19 month ago, 239, 18 month ago, 240, 17 month ago, 241, 16 month ago, 242, 15 month ago, 243, 14 month ago, 244, 13 month ago, 245, 12 month ago, 246, 11 month ago, 247, 10 month ago, 248, 9 month ago, 249, 8 month ago, 250, 7 month ago, 251, 6 month ago, 252, 5 month ago, 253, 4 month ago, 254, 3 month ago, 231, 2 month ago, 230, 1 month ago, 229, 3 weeks ago, 228, 2 weeks ago, 227, 1 week ago, 226
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+[fetch]
+	writeCommitGraph = true
+; [pager]
+; 	show = nvim -
+
+[core]
+	excludesFile = ~/.gitignore
+    ; pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
