@@ -16,7 +16,7 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-setopt autocd autopushd pushdignoredups histignorealldups numericglobsort appendhistory extendedglob
+setopt autocd autopushd pushdignoredups histignorealldups numericglobsort appendhistory 
 
 
 # __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -107,5 +107,19 @@ enable-fzf-tab
 # eval "`fnm env`"
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/scripts
-export PATH=$PATH:$HOME/.local/bin/scripts/shawnwn
+
 # zprof
+
+_direnv_hook() {
+  trap -- '' SIGINT
+  eval "$("/opt/homebrew/bin/direnv" export zsh)"
+  trap - SIGINT
+}
+typeset -ag precmd_functions
+if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
+  precmd_functions=(_direnv_hook $precmd_functions)
+fi
+typeset -ag chpwd_functions
+if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
+  chpwd_functions=(_direnv_hook $chpwd_functions)
+fi
