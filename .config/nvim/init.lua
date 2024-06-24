@@ -2,39 +2,50 @@
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  "folke/which-key.nvim",
-  "neovim/nvim-lspconfig",
-  {
-    'nvim-telescope/telescope.nvim', tag = '0.1.6',
--- or                              , branch = '0.1.x',
-      dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-  "shaunsingh/nord.nvim",
-  -- "github/copilot.vim",
-  "tpope/vim-fugitive",
-  "nvim-treesitter/nvim-treesitter",
-  {
-    "rmagatti/auto-session",
-    lazy = false,
-    config = function()
-      require("auto-session").setup {
-        log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-      }
-    end,
-  },
+	"folke/which-key.nvim",
+	"neovim/nvim-lspconfig",
+	{
+		'nvim-telescope/telescope.nvim', tag = '0.1.6',
+		-- or                              , branch = '0.1.x',
+		dependencies = { 'nvim-lua/plenary.nvim' }
+	},
+	"shaunsingh/nord.nvim",
+	-- "github/copilot.vim",
+	"tpope/vim-fugitive",
+	{
+		"nvim-treesitter/nvim-treesitter",
+		config = function()
+			require("nvim-treesitter.configs").setup {
+				highlight = {
+					enable = true,
+				},
+			}
+		end,
+	},
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		config = function()
+			require("auto-session").setup {
+				log_level = "error",
+				auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+			}
+		end,
+	},
+	"Almo7aya/openingh.nvim",
+	"tpope/vim-surround"
 })
 
 
@@ -45,23 +56,27 @@ vim.cmd [[autocmd FileType * set formatoptions-=ro]] -- otherwise it gets overwr
 
 vim.cmd[[colorscheme nord]]
 
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
 -- lsp
 local lspconfig = require "lspconfig"
 
 local servers = { "html", "cssls", "tsserver", "clangd", "pylsp", "eslint", "tailwindcss", "terraform_lsp" }
 
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
+	lspconfig[lsp].setup {
+		on_attach = on_attach,
+		capabilities = capabilities,
+	}
 end
 
 lspconfig.terraformls.setup {
-  on_attach = function()
-    require("treesitter-terraform-doc").setup()
-  end,
-  capabilities = capabilities,
+	on_attach = function()
+		require("treesitter-terraform-doc").setup()
+	end,
+	capabilities = capabilities,
 }
 
 
