@@ -66,7 +66,7 @@ vim.opt.clipboard:append { 'unnamedplus' }
 vim.opt.ignorecase = true
 vim.opt.hlsearch = false
 vim.opt.smartcase = true
-vim.opt.undodir="~/.local/share/nvim/undo"
+vim.opt.undodir = os.getenv( "HOME" ) .. '/.local/share/nvim/undo' -- -_-
 vim.opt.undofile = true
 
 vim.o.number = true
