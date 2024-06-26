@@ -14,7 +14,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"folke/which-key.nvim",
+	{
+	  "folke/which-key.nvim",
+	  event = "VeryLazy",
+	  init = function()
+		vim.o.timeout = true
+		vim.o.timeoutlen = 300
+	  end,
+	  opts = {
+		-- your configuration comes here
+		-- or leave it empty to use the default settings
+		-- refer to the configuration section below
+	  }
+	},
 	"neovim/nvim-lspconfig",
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.6',
@@ -22,7 +34,7 @@ require("lazy").setup({
 		dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 	"shaunsingh/nord.nvim",
-	-- "github/copilot.vim",
+	"github/copilot.vim",
 	"tpope/vim-fugitive",
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -51,6 +63,12 @@ require("lazy").setup({
 
 -- options
 vim.opt.clipboard:append { 'unnamedplus' }
+vim.opt.ignorecase = true
+vim.opt.hlsearch = false
+vim.opt.smartcase = true
+vim.opt.undodir="~/.local/share/nvim/undo"
+vim.opt.undofile = true
+
 vim.o.number = true
 vim.cmd [[autocmd FileType * set formatoptions-=ro]] -- otherwise it gets overwritten by some random ftplugin. absolutely bullshit
 
@@ -88,4 +106,5 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>bd', "<CMD>bd<CR>", {desc = "Delete buffer"})
 
