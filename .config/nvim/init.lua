@@ -100,6 +100,7 @@ lspconfig.terraformls.setup {
 
 -- keymaps
 vim.g.mapleader = ' '
+local noop = function() end -- FIXME: This cannot be right
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>e', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
@@ -107,4 +108,11 @@ vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>bd', "<CMD>bd<CR>", {desc = "Delete buffer"})
+vim.keymap.set('n', '<F1>', noop)
+vim.keymap.set('n', '<F2>', "<CMD>lua vim.lsp.buf.rename()<CR>", {})
+
+vim.cmd [[
+	nnoremap <silent> <down> <c-e>
+	nnoremap <silent> <up> <c-y>
+	]]
 
