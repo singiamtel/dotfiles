@@ -81,7 +81,7 @@ vim.opt.shiftwidth = 4
 -- lsp
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "tsserver", "clangd", "pylsp", "eslint", "tailwindcss", "terraform_lsp" }
+local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "eslint", "tailwindcss", "terraform_lsp" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {
