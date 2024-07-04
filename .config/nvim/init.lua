@@ -79,7 +79,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
 -- lsp
-local lspconfig = require "lspconfig"
+local lspconfig = require('lspconfig')
 
 local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "eslint", "tailwindcss", "terraform_lsp" }
 
@@ -110,6 +110,8 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>bd', "<CMD>bd<CR>", {desc = "Delete buffer"})
 vim.keymap.set('n', '<F1>', noop)
 vim.keymap.set('n', '<F2>', "<CMD>lua vim.lsp.buf.rename()<CR>", {})
+vim.keymap.set('n', '<leader>gB', "<CMD>G blame<CR>", {})
+vim.keymap.set('n', '<leader><leader>',  "<CMD>:b#<CR>", {desc= "Switch to last buffer"})
 
 vim.cmd [[
 	nnoremap <silent> <down> <c-e>
