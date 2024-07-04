@@ -52,3 +52,5 @@
 (package! treesit-auto)
 (package! rainbow-mode)
 (package! terraform-mode)
+(package! copilot
+  :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
