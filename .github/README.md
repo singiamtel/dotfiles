@@ -4,7 +4,6 @@ This repository keeps all of the config files I use on my workflow
 
 ## Installation requirements
 
-- neovim + [NvChad](https://nvchad.com)
 - zsh + [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh)
 
 ```bash
