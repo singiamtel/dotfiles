@@ -15,23 +15,45 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	{
-	  "folke/which-key.nvim",
-	  event = "VeryLazy",
-	  init = function()
-		vim.o.timeout = true
-		vim.o.timeoutlen = 300
-	  end,
-	  opts = {
-		-- your configuration comes here
-		-- or leave it empty to use the default settings
-		-- refer to the configuration section below
-	  }
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		}
 	},
 	"neovim/nvim-lspconfig",
 	{
 		'nvim-telescope/telescope.nvim', tag = '0.1.6',
 		-- or                              , branch = '0.1.x',
-		dependencies = { 'nvim-lua/plenary.nvim' }
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+
+		}
+	},
+	{
+	  'linux-cultist/venv-selector.nvim',
+	  branch = "regexp",
+	  dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+	  config = function()
+		require('venv-selector').setup {
+		  -- Your options go here
+		  -- name = "venv",
+		  -- auto_refresh = false
+		}
+	  end,
+	  event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
+	  keys = {
+		-- Keymap to open VenvSelector to pick a venv.
+		{ '<leader>vs', '<cmd>VenvSelect<cr>' },
+		-- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
+		{ '<leader>vc', '<cmd>VenvSelectCached<cr>' },
+	  },
 	},
 	"shaunsingh/nord.nvim",
 	"github/copilot.vim",
@@ -43,6 +65,13 @@ require("lazy").setup({
 				highlight = {
 					enable = true,
 				},
+				ensure_installed = {
+					"vimdoc",
+					"luadoc",
+					"vim",
+					"lua",
+					"markdown"
+				}
 			}
 		end,
 	},
@@ -90,6 +119,21 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
+vim.api.nvim_create_autocmd('VimEnter', {
+	desc = 'Auto select virtualenv Nvim open',
+	pattern = '*',
+	callback = function()
+		local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
+		if venv ~= '' then
+			selector = require('venv-selector')
+			if selector.retrieve_from_cache then
+				selector.retrieve_from_cache()
+			end
+		end
+	end,
+	once = true,
+})
+
 lspconfig.terraformls.setup {
 	on_attach = function()
 		require("treesitter-terraform-doc").setup()
@@ -112,9 +156,10 @@ vim.keymap.set('n', '<F1>', noop)
 vim.keymap.set('n', '<F2>', "<CMD>lua vim.lsp.buf.rename()<CR>", {})
 vim.keymap.set('n', '<leader>gB', "<CMD>G blame<CR>", {})
 vim.keymap.set('n', '<leader><leader>',  "<CMD>:b#<CR>", {desc= "Switch to last buffer"})
+vim.keymap.set('n', '<leader>dt',  "<CMD>:%s/\\s\\+$//e<CR>", {desc= "Delete trailing spaces"})
 
 vim.cmd [[
-	nnoremap <silent> <down> <c-e>
-	nnoremap <silent> <up> <c-y>
-	]]
+nnoremap <silent> <down> <c-e>
+nnoremap <silent> <up> <c-y>
+]]
 
