@@ -124,3 +124,4 @@ typeset -ag chpwd_functions
 if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
   chpwd_functions=(_direnv_hook $chpwd_functions)
 fi
+eval "$(atuin init zsh --disable-up-arrow)"
