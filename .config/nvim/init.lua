@@ -85,6 +85,21 @@ require("lazy").setup({
 			}
 		end,
 	},
+	{
+	  "m00qek/baleia.nvim",
+	  version = "*",
+	  config = function()
+		vim.g.baleia = require("baleia").setup({ })
+
+		-- Command to colorize the current buffer
+		vim.api.nvim_create_user_command("Colorize", function()
+		  vim.g.baleia.once(vim.api.nvim_get_current_buf())
+		end, { bang = true })
+
+		-- Command to show logs 
+		vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
+	  end,
+	},
 	"Almo7aya/openingh.nvim",
 	"tpope/vim-surround"
 })
@@ -161,5 +176,7 @@ vim.keymap.set('n', '<leader>dt',  "<CMD>:%s/\\s\\+$//e<CR>", {desc= "Delete tra
 vim.cmd [[
 nnoremap <silent> <down> <c-e>
 nnoremap <silent> <up> <c-y>
+nmap n nzzzv
+nmap N Nzzzv
 ]]
 
