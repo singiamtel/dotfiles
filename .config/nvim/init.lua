@@ -122,10 +122,12 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
+vim.o.guifont = "FiraCode Nerd Font Propo:h12"
+
 -- lsp
 local lspconfig = require('lspconfig')
 
-local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "eslint", "tailwindcss", "terraform_lsp" }
+local servers = { "html", "cssls", "tsserver", "clangd", "pyright", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup {
