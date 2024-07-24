@@ -109,19 +109,5 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/scripts
 export PATH=$PATH:$HOME/.local/bin/scripts/private
 
-# zprof
-
-_direnv_hook() {
-  trap -- '' SIGINT
-  eval "$("/opt/homebrew/bin/direnv" export zsh)"
-  trap - SIGINT
-}
-typeset -ag precmd_functions
-if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
-  precmd_functions=(_direnv_hook $precmd_functions)
-fi
-typeset -ag chpwd_functions
-if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
-  chpwd_functions=(_direnv_hook $chpwd_functions)
-fi
+eval "$("/opt/homebrew/bin/direnv" export zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
