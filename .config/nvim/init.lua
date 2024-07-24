@@ -37,23 +37,29 @@ require("lazy").setup({
 		}
 	},
 	{
-	  'linux-cultist/venv-selector.nvim',
-	  branch = "regexp",
-	  dependencies = { 'neovim/nvim-lspconfig', 'nvim-telescope/telescope.nvim', 'mfussenegger/nvim-dap-python' },
+	  "linux-cultist/venv-selector.nvim",
+		dependencies = {
+		  "neovim/nvim-lspconfig", 
+		  "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
+		  { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+		},
+	  lazy = false,
+	  branch = "regexp", -- This is the regexp branch, use this for the new version
 	  config = function()
-		require('venv-selector').setup {
-		  -- Your options go here
-		  -- name = "venv",
-		  -- auto_refresh = false
-		}
-	  end,
-	  event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
-	  keys = {
-		-- Keymap to open VenvSelector to pick a venv.
-		{ '<leader>vs', '<cmd>VenvSelect<cr>' },
-		-- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-		{ '<leader>vc', '<cmd>VenvSelectCached<cr>' },
-	  },
+		  require("venv-selector").setup {
+			  lazy = false,
+			  settings = {
+				options = {
+				  debug = true,
+				  enable_cached_venvs = true,
+				  cached_venv_automatic_activation = true
+				},
+			  },
+		  }
+		end,
+		keys = {
+		  { "<leader>v", "<cmd>VenvSelect<cr>" },
+		},
 	},
 	"shaunsingh/nord.nvim",
 	"github/copilot.vim",
@@ -136,21 +142,6 @@ for _, lsp in ipairs(servers) do
 	}
 end
 
-vim.api.nvim_create_autocmd('VimEnter', {
-	desc = 'Auto select virtualenv Nvim open',
-	pattern = '*',
-	callback = function()
-		local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
-		if venv ~= '' then
-			selector = require('venv-selector')
-			if selector.retrieve_from_cache then
-				selector.retrieve_from_cache()
-			end
-		end
-	end,
-	once = true,
-})
-
 lspconfig.terraformls.setup {
 	on_attach = function()
 		require("treesitter-terraform-doc").setup()
@@ -159,26 +150,33 @@ lspconfig.terraformls.setup {
 }
 
 
--- keymaps
+--- Keymaps
 vim.g.mapleader = ' '
 local noop = function() end -- FIXME: This cannot be right
+vim.keymap.set('n', '<leader>bd', "<CMD>bd<CR>", {desc = "Delete buffer"})
+vim.keymap.set('n', '<F1>', noop)
+vim.keymap.set('n', '<leader>dt',  "<CMD>:%s/\\s\\+$//e<CR>", {desc= "Delete trailing spaces"})
+vim.keymap.set('n', '<leader><leader>',  "<CMD>:b#<CR>", {desc= "Switch to last buffer"})
+vim.keymap.set('n', '<leader>gb', "<CMD>G blame<CR>", {})
+--- Keymaps - Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>e', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>bd', "<CMD>bd<CR>", {desc = "Delete buffer"})
-vim.keymap.set('n', '<F1>', noop)
+--- Keymaps - LSP
 vim.keymap.set('n', '<F2>', "<CMD>lua vim.lsp.buf.rename()<CR>", {})
-vim.keymap.set('n', '<leader>gB', "<CMD>G blame<CR>", {})
-vim.keymap.set('n', '<leader><leader>',  "<CMD>:b#<CR>", {desc= "Switch to last buffer"})
-vim.keymap.set('n', '<leader>dt',  "<CMD>:%s/\\s\\+$//e<CR>", {desc= "Delete trailing spaces"})
+vim.keymap.set('n', 'gd', "<CMD>lua vim.lsp.buf.definition()<CR>", {desc= "LSP: Go to definition"})
+vim.keymap.set('n', '<leader>li', "<CMD>LspInfo<CR>", {})
+vim.keymap.set('n', '<leader>lk', "<CMD>LspStop<CR>", {})
+vim.keymap.set('n', '<leader>ls', "<CMD>LspStart<CR>", {})
+
 
 vim.cmd [[
 nnoremap <silent> <down> <c-e>
 nnoremap <silent> <up> <c-y>
 nmap n nzzzv
 nmap N Nzzzv
+set list listchars=tab:!·,trail:·
 ]]
-
