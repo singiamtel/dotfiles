@@ -179,4 +179,5 @@ nnoremap <silent> <up> <c-y>
 nmap n nzzzv
 nmap N Nzzzv
 set list listchars=tab:!·,trail:·
+set shiftwidth=4 smarttab expandtab tabstop=8 softtabstop=0
 ]]
