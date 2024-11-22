@@ -109,6 +109,7 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/scripts
 export PATH=$PATH:$HOME/.local/bin/scripts/private
 
-eval "$("/opt/homebrew/bin/direnv" export zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 source $HOMEBREW_PREFIX/opt/modules/init/zsh
+
+autoload -U +X bashcompinit && bashcompinit

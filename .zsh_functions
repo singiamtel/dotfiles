@@ -45,7 +45,7 @@ add-zsh-hook chpwd -auto-ls-after-cd
 
 lg()
 {
-    export LAZYGIT_NEW_DIR_FILE=/tmp/lazygitnewdir
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
 
     lazygit "$@"
 

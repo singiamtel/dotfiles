@@ -27,6 +27,8 @@ alias ex="(dolphin .  & disown) > /dev/null 2>&1"
 alias gd="git difftool"
 alias workfox="firefox --no-remote -P work --class=secondclass"
 alias md="frogmouth"
+alias py="python"
+alias js="node"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
@@ -58,7 +60,7 @@ alias ghc="ghc -dynamic"
 alias defenestrate="rm -rf"
 
 # Global aliases
-alias -g G="|grep -Ei"
+alias -g G="|rg -i"
 alias -g CP="|pbcopy"
 alias -g V="|vim -"
 alias -g TEE="> >(tee -a stdout.log) 2> >(tee -a stderr.log >&2)"

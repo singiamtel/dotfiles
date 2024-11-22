@@ -44,9 +44,14 @@
 [core]
 	excludesFile = ~/.gitignore
     ; pager = delta
-[interactive]
-    diffFilter = delta --color-only
+; [interactive]
+;     diffFilter = difft "$LOCAL" "$REMOTE"
 [delta]
     navigate = true    # use n and N to move between diff sections
 [rebase]
 	autoStash = true
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
