@@ -41,6 +41,8 @@ alias cal='cal --monday'
 alias ip='ip --color=always'
 alias mv="mv -i"
 alias grep="grep -E" # Who even knows normal grep
+alias tidy="tidy --tidy-mark no"
+alias diff="diff -u"
 
 # Youtube
 alias yt="yt-dlp --add-metadata -i" # Download video link
