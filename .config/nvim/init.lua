@@ -166,6 +166,8 @@ vim.keymap.set('n', '<leader>dt',  "<CMD>:%s/\\s\\+$//e<CR>", {desc= "Delete tra
 vim.keymap.set('n', '<leader><leader>',  "<CMD>:b#<CR>", {desc= "Switch to last buffer"})
 vim.keymap.set('n', '<leader>gb', "<CMD>G blame -w<CR>", {})
 vim.keymap.set('n', '<leader>h', "<CMD>set hls!<CR>", {})
+vim.keymap.set('n', '<leader>j', "<CMD>bp<CR>", {})
+vim.keymap.set('n', '<leader>k', "<CMD>bn<CR>", {})
 --- Keymaps - Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>e', builtin.diagnostics, {})
