@@ -29,6 +29,7 @@ alias workfox="firefox --no-remote -P work --class=secondclass"
 alias md="frogmouth"
 alias py="python"
 alias js="node"
+alias lg="lazygit"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
