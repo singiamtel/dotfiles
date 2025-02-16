@@ -82,3 +82,5 @@ eval "$(atuin init zsh --disable-up-arrow)"
 source $HOMEBREW_PREFIX/opt/modules/init/zsh
 
 autoload -U +X bashcompinit && bashcompinit
+
+source "$HOME/.cargo/env"
