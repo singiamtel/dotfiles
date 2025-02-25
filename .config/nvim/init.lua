@@ -27,7 +27,9 @@ require("lazy").setup({
             -- refer to the configuration section below
         }
     },
+    { "kevinhwang91/nvim-bqf", ft = "qf" },
     "neovim/nvim-lspconfig",
+    'junegunn/fzf',
     "nvim-treesitter/nvim-treesitter-context",
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.6',
@@ -168,6 +170,10 @@ vim.keymap.set('n', '<leader>gb', "<CMD>G blame -w<CR>", {})
 vim.keymap.set('n', '<leader>h', "<CMD>set hls!<CR>", {})
 vim.keymap.set('n', '<leader>j', "<CMD>bp<CR>", {})
 vim.keymap.set('n', '<leader>k', "<CMD>bn<CR>", {})
+toggle_qf = function() local qf_exists = false for _, win in pairs(vim.fn.getwininfo()) do if win["quickfix"] == 1 then qf_exists = true end end if qf_exists == true then vim.cmd "cclose" return end if not vim.tbl_isempty(vim.fn.getqflist()) then vim.cmd "copen" end end
+vim.keymap.set('n', '<leader>q', toggle_qf, {})
+vim.keymap.set('n', '<c-j>', "<CMD>cnext<CR>", {})
+vim.keymap.set('n', '<c-k>', "<CMD>cprevious<CR>", {})
 --- Keymaps - Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>e', builtin.diagnostics, {})
