@@ -30,6 +30,7 @@ alias md="frogmouth"
 alias py="python"
 alias js="node"
 alias lg="lazygit"
+alias rp="realpath"
 
 # Misc aliases and default flags behaviour
 alias ref="source ~/.zshrc"
