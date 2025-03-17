@@ -168,12 +168,12 @@ vim.keymap.set('n', '<leader>dt',  "<CMD>:%s/\\s\\+$//e<CR>", {desc= "Delete tra
 vim.keymap.set('n', '<leader><leader>',  "<CMD>:b#<CR>", {desc= "Switch to last buffer"})
 vim.keymap.set('n', '<leader>gb', "<CMD>G blame -w<CR>", {})
 vim.keymap.set('n', '<leader>h', "<CMD>set hls!<CR>", {})
-vim.keymap.set('n', '<leader>j', "<CMD>bp<CR>", {})
-vim.keymap.set('n', '<leader>k', "<CMD>bn<CR>", {})
+vim.keymap.set('n', '<leader>j', "<CMD>cprevious<CR>", {})
+vim.keymap.set('n', '<leader>k', "<CMD>cnext<CR>", {})
 toggle_qf = function() local qf_exists = false for _, win in pairs(vim.fn.getwininfo()) do if win["quickfix"] == 1 then qf_exists = true end end if qf_exists == true then vim.cmd "cclose" return end if not vim.tbl_isempty(vim.fn.getqflist()) then vim.cmd "copen" end end
 vim.keymap.set('n', '<leader>q', toggle_qf, {})
-vim.keymap.set('n', '<c-j>', "<CMD>cnext<CR>", {})
-vim.keymap.set('n', '<c-k>', "<CMD>cprevious<CR>", {})
+vim.keymap.set('n', '<c-j>', "<CMD>bn<CR>", {})
+vim.keymap.set('n', '<c-k>', "<CMD>bp<CR>", {})
 --- Keymaps - Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>e', builtin.diagnostics, {})
