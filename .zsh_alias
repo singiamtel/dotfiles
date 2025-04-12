@@ -65,7 +65,7 @@ alias ghc="ghc -dynamic"
 alias defenestrate="rm -rf"
 
 # Global aliases
-alias -g G="|rg -i"
-alias -g CP="|pbcopy"
-alias -g V="|vim -"
+alias -g G="|& rg -i"
+alias -g CP="|& pbcopy"
+alias -g V="|& vim -"
 alias -g TEE="> >(tee -a stdout.log) 2> >(tee -a stderr.log >&2)"
