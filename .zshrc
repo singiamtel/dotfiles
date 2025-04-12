@@ -78,6 +78,8 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.local/bin/scripts
 export PATH=$PATH:$HOME/.local/bin/scripts/private
 
+export MANPAGER='nvim +Man!'
+
 export PAGER="less -F -X"
 
 eval "$(atuin init zsh --disable-up-arrow)"
