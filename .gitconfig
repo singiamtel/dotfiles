@@ -74,3 +74,5 @@
     untrackedCache = true
 [merge]
     conflictstyle = zdiff3 
+[am]
+	threeWay = true
