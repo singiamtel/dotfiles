@@ -16,6 +16,8 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 setopt autocd autopushd pushdignoredups histignorealldups numericglobsort appendhistory 
 
+# This has to be before the plugins
+[[ -d "/opt/homebrew/opt/python@3.13/libexec/bin" ]] && export PATH="$PATH:/opt/homebrew/opt/python@3.13/libexec/bin"
 
 plugins=(
     fzf-tab
@@ -92,7 +94,6 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/bin/scripts"
 export PATH="$PATH:$HOME/.local/bin/scripts/private"
 export PATH="$PATH:$HOME/.cargo/bin"
-[[ -d "/opt/homebrew/opt/python@3.13/libexec/bin" ]] && export PATH="$PATH:/opt/homebrew/opt/python@3.13/libexec/bin"
 [[ -d "$HOME/Library/Python/3.13/bin" ]] && export PATH="$PATH:$HOME/Library/Python/3.13/bin"
 
 # alias
@@ -101,7 +102,7 @@ alias act='act --container-architecture linux/amd64' # for M1
 alias ka="killall"
 alias calc="python -i ~/.config/math_mode.py"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
-alias gd="git difftool"
+# alias gd="git difftool"
 alias cd..="cd .."
 alias df="df -h"
 alias grep="grep -E --color=auto"
@@ -118,7 +119,7 @@ alias lg="lazygit"
 alias lazyconf="lazygit --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias rp="realpath"
 alias fm="fastmod"
-alias cloc="tokei"
+alias dt="difft"
 alias tidy="tidy --tidy-mark no"
 alias yt="yt-dlp --add-metadata -i" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
@@ -127,3 +128,8 @@ alias -g G="|& rg -i"
 alias -g CP="|& pbcopy"
 alias -g V="|& vim -"
 alias -g TEE="> >(tee -a stdout.log) 2> >(tee -a stderr.log >&2)"
+
+gs () {
+    git branch -vv
+    git status
+}
