@@ -3,18 +3,24 @@ vim.g.mapleader = " "
 local function noop() end -- FIXME: There must be a better way to disable the help popup
 
 local function toggle_quickfix()
-	local qf_exists = false
-	for _, win in pairs(vim.fn.getwininfo()) do
-		if win["quickfix"] == 1 then
-			qf_exists = true
-		end
-	end
+    local qf_exists = false
+    local qf_focused = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win["quickfix"] == 1 then
+            qf_exists = true
+            if win["winid"] == vim.api.nvim_get_current_win() then
+                qf_focused = true
+            end
+        end
+    end
 
-	if qf_exists then
-		vim.cmd("cclose")
-	elseif not vim.tbl_isempty(vim.fn.getqflist()) then
-		vim.cmd("copen")
-	end
+    if qf_exists and not qf_focused then
+        vim.cmd("copen") -- Focus the quickfix window
+    elseif qf_exists then
+        vim.cmd("cclose")
+    elseif not vim.tbl_isempty(vim.fn.getqflist()) then
+        vim.cmd("copen")
+    end
 end
 
 local M = {}
