@@ -23,8 +23,8 @@
     path= ~/.gitconfig_local
 [commit] # Show diff in commit message
     verbose = true
-[url "git@github.com:"] # So good
-    insteadOf = https://github.com/
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [blame]
     date = relative
     ; coloring = highlightRecent
