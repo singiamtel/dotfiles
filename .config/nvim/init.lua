@@ -65,14 +65,14 @@ require("lazy").setup({
 	"github/copilot.vim",
 	"rcarriga/nvim-notify",
 	"tpope/vim-fugitive",
-	{
-		"m4xshen/hardtime.nvim",
-		lazy = false,
-		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = {
-			disable_mouse = false,
-		},
-	},
+	-- {
+	-- 	"m4xshen/hardtime.nvim",
+	-- 	lazy = false,
+	-- 	dependencies = { "MunifTanjim/nui.nvim" },
+	-- 	opts = {
+	-- 		disable_mouse = false,
+	-- 	},
+	-- },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = function()
@@ -92,7 +92,7 @@ require("lazy").setup({
 	},
 	{
 		"rmagatti/auto-session",
-		lazy = false,
+		-- lazy = false,
 		config = function()
 			require("auto-session").setup({
 				log_level = "error",
@@ -150,6 +150,7 @@ vim.opt.listchars = {
 	tab = "!·",
 	trail = "·",
 }
+vim.opt.diffopt:append("horizontal")
 
 vim.cmd([[autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab]])
 
@@ -161,7 +162,7 @@ vim.o.guifont = "FiraCode Nerd Font Propo:h12"
 local lspconfig = require("lspconfig")
 
 local servers =
-	{ "html", "cssls", "ts_ls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls" }
+	{ "html", "cssls", "ts_ls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright"}
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
@@ -170,7 +171,7 @@ for _, lsp in ipairs(servers) do
 	})
 end
 
-vim.lsp.enable({ "pyrefly" })
+-- vim.lsp.enable({ "pyrefly" })
 
 lspconfig.terraformls.setup({
 	on_attach = function()
