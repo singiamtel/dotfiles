@@ -32,6 +32,9 @@ M.setup = function()
 	vim.keymap.set("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
 	vim.keymap.set("n", "<c-j>", "<cmd>bn<cr>", { desc = "Next buffer" })
 	vim.keymap.set("n", "<c-k>", "<cmd>bp<cr>", { desc = "Previous buffer" })
+	vim.keymap.set("n", "<leader>c","<cmd> silent execute '!cursor . --goto %:' . line('.') . ':' . col('.')<cr>", { desc = "Open in Cursor" })
+
+
 
 	-- Editor functions
 	vim.keymap.set("n", "<F1>", noop, { desc = "Disable help popup" })
