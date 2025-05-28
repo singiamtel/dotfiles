@@ -26,7 +26,7 @@ plugins=(
     zsh-autosuggestions
     zsh-fzf-history-search
     zsh-syntax-highlighting
-    autoswitch_virtualenv
+    # autoswitch_virtualenv
 )
 
 source "$ZSH/oh-my-zsh.sh"
@@ -71,6 +71,7 @@ enable-fzf-tab
 
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(direnv hook zsh)"
 
 source "$HOMEBREW_PREFIX/opt/modules/init/zsh"
 
@@ -94,6 +95,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/bin/scripts"
 export PATH="$PATH:$HOME/.local/bin/scripts/private"
 export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:$HOME/.bun/bin"
 [[ -d "$HOME/Library/Python/3.13/bin" ]] && export PATH="$PATH:$HOME/Library/Python/3.13/bin"
 
 # alias
@@ -111,7 +113,8 @@ alias ls='ls -h --color=auto'
 alias diff="diff --color=auto"
 alias sdn="sudo shutdown now"
 
-alias e="nvim" && alias v="e" && alias vi="nvim" && alias vim="nvim"
+alias e="nvim" && alias vi="nvim" && alias vim="nvim"
+alias v="source .venv/bin/activate"
 alias f='nvim $(fzf)'
 alias SS="sudo systemctl"
 alias r="ranger"
