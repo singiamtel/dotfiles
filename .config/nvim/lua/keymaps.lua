@@ -47,20 +47,21 @@ M.setup = function()
 	vim.keymap.set("n", "<leader>gd", "<cmd>Gvdiffsplit<cr>", { desc = "Git diff split" })
 
 	-- Quickfix navigation
-	vim.keymap.set("n", "<leader>j", "<cmd>cprevious<cr>", { desc = "Previous quickfix item" })
-	vim.keymap.set("n", "<leader>k", "<cmd>cnext<cr>", { desc = "Next quickfix item" })
+	vim.keymap.set("n", "<leader>[", "<cmd>cprevious<cr>", { desc = "Previous quickfix item" })
+	vim.keymap.set("n", "<leader>]", "<cmd>cnext<cr>", { desc = "Next quickfix item" })
 	vim.keymap.set("n", "<leader>q", toggle_quickfix, { desc = "Toggle quickfix window" })
 
 	-- LSP keymaps
 	vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { desc = "LSP: Rename symbol" })
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
-	vim.keymap.set("n", "<s-I>", vim.diagnostic.open_float, { desc = "LSP: Show diagnostics" })
+	vim.keymap.set("n", "<s-m>", vim.diagnostic.open_float, { desc = "LSP: Show diagnostics" })
 	vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, { desc = "LSP: Jump to next diagnostic" })
 	vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, { desc = "LSP: Jump to previous diagnostic" })
 	vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP: Show info" })
 	vim.keymap.set("n", "<leader>lk", "<cmd>LspStop<cr>", { desc = "LSP: Stop" })
 	vim.keymap.set("n", "<leader>ls", "<cmd>LspStart<cr>", { desc = "LSP: Start" })
 	vim.keymap.set("n", "<leader>v", "<cmd>VenvSelect<cr>", { desc = "Select Python virtual environment" })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'vim.lsp.buf.hover()' })
 
 	-- Telescope keymaps
 	local telescope = require("telescope.builtin")
@@ -74,6 +75,7 @@ M.setup = function()
 	vim.keymap.set("n", "<leader>fw", telescope.live_grep, { desc = "Telescope: Live grep" })
 	vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope: Buffers" })
 	vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Telescope: Help tags" })
+	vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "Telescope: Keymaps" })
 end
 
 return M
