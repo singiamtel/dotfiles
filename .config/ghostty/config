@@ -1,1 +1,2 @@
 theme = dark:nord,light:GitHub-Light-Default
+keybind = super+enter=ignore
