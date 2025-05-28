@@ -69,9 +69,9 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 enable-fzf-tab
 
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
-eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(direnv hook zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
 source "$HOMEBREW_PREFIX/opt/modules/init/zsh"
 
