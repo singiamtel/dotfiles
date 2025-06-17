@@ -25,6 +25,8 @@ end
 
 local M = {}
 
+local diff = require("diff")
+
 M.setup = function()
     -- Buffer management
     vim.keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete buffer" })
@@ -34,6 +36,12 @@ M.setup = function()
     vim.keymap.set("n", "<c-k>", "<cmd>bp<cr>", { desc = "Previous buffer" })
     vim.keymap.set("n", "<leader>c", "<cmd> silent execute '!cursor . --goto %:' . line('.') . ':' . col('.')<cr>",
         { desc = "Open in Cursor" })
+
+
+    -- diffs
+    vim.keymap.set('v', '<leader>ds', diff.store_selection, { desc = 'Store selection for diff' })
+    vim.keymap.set('v', '<leader>dc', diff.diff_with_stored, { desc = 'Compare with stored selection' })
+    vim.keymap.set('v', '<leader>dq', diff.quick_diff, { desc = 'Quick diff - store and wait for next selection' })
 
 
 
