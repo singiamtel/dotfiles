@@ -126,6 +126,7 @@ alias dt="difft"
 alias tidy="tidy --tidy-mark no"
 alias yt="yt-dlp --add-metadata -i" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
+alias xhjb="noglob xh --offline --print=B fake.url" # https://blog.stulta.dev/posts/annoying_json/
 
 alias -g G="|& rg -i"
 alias -g CP="|& pbcopy"
