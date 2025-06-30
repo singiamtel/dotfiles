@@ -31,6 +31,9 @@ symbol = " "
 
 [directory]
 read_only = " 󰌾"
+truncate_to_repo = false
+truncation_length = 5
+truncation_symbol = '../'
 
 [docker_context]
 symbol = " "
@@ -52,9 +55,16 @@ symbol = "  "
 
 [git_branch]
 symbol = " "
+always_show_remote = false
 
 [git_commit]
 tag_symbol = '  '
+
+[git_metrics]
+disabled = false
+
+[git_status]
+stashed = ""
 
 [golang]
 symbol = " "
@@ -73,6 +83,8 @@ symbol = " "
 
 [hostname]
 ssh_symbol = " "
+ssh_only = false
+format = "[$hostname]($style) "
 
 [java]
 symbol = " "
@@ -183,6 +195,10 @@ symbol = " "
 
 [swift]
 symbol = " "
+
+[username]
+show_always = true
+format = "[$user]($style)@"
 
 [zig]
 symbol = " "
