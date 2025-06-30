@@ -31,7 +31,7 @@ export PATH="$PATH:$HOME/.local/bin/scripts"
 export PATH="$PATH:$HOME/.local/bin/scripts/private"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.bun/bin"
-[[ -d "$HOME/Library/Python/3.13/bin" ]] && export PATH="$PATH:$HOME/Library/Python/3.13/bin"
+export GOPATH="$HOME/.local/share/go"
 
 source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
