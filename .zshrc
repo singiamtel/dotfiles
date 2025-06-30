@@ -60,10 +60,6 @@ alias gst='git status'
 alias gcp='git cherry-pick'
 alias grv='git remote -v'
 
-# Z directory jumping (replacing z plugin)
-# Install zoxide as a modern replacement: brew install zoxide
-eval "$(zoxide init zsh)"
-
 # fzf-tab configuration
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 enable-fzf-tab
@@ -98,9 +94,13 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # External tool initialization
+eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(fnm env --version-file-strategy=recursive)"
 eval "$(direnv hook zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
 source "$HOMEBREW_PREFIX/opt/modules/init/zsh"
 source "$HOME/.cargo/env"
 
@@ -151,6 +151,3 @@ gs () {
     git branch -vv
     git status
 }
-
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
