@@ -57,6 +57,8 @@ alias gp='git push'
 alias gpsup='git push --set-upstream origin $(git branch --show-current)'
 alias grb='git rebase'
 alias gst='git status'
+alias gcp='git cherry-pick'
+alias grv='git remote -v'
 
 # Z directory jumping (replacing z plugin)
 # Install zoxide as a modern replacement: brew install zoxide
