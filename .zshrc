@@ -59,6 +59,7 @@ alias grb='git rebase'
 alias gst='git status'
 alias gcp='git cherry-pick'
 alias grv='git remote -v'
+alias gsh='git show'
 
 # fzf-tab configuration
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
