@@ -7,7 +7,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
 end
@@ -19,17 +19,6 @@ require("lazy").setup({
         {
             'gelguy/wilder.nvim',
             config = function()
-                --             local wilder = require('wilder')
-                --             wilder.setup({ modes = { ':', '/', '?' } })
-                --             -- wilder.set_option('renderer', wilder.popupmenu_renderer({
-                --             --     highlighter = wilder.basic_highlighter(),
-                --             --     highlights = {
-                --             --         accent = 'PmenuSel',
-                --             --         default = 'Pmenu',
-                --             --     },
-                --             -- }))
-                --             wilder.set_option('pipeline', {
-                --               wilder.branch(
                 local wilder = require('wilder')
                 wilder.setup({ modes = { ':', '/', '?' } })
 
@@ -65,11 +54,6 @@ require("lazy").setup({
             vim.o.timeout = true
             vim.o.timeoutlen = 300
         end,
-        opts = {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        },
     },
     { "kevinhwang91/nvim-bqf", ft = "qf" },
     "neovim/nvim-lspconfig",
@@ -92,57 +76,42 @@ require("lazy").setup({
         },
         lazy = false,
         branch = "regexp", -- This is the regexp branch, use this for the new version
-        config = function()
-            require("venv-selector").setup({
-                lazy = false,
-                settings = {
-                    options = {
-                        debug = true,
-                        enable_cached_venvs = true,
-                        cached_venv_automatic_activation = true,
-                    },
+        opts = {
+            settings = {
+                options = {
+                    debug = false,
+                    enable_cached_venvs = true,
+                    cached_venv_automatic_activation = true,
                 },
-            })
-        end,
+            },
+        },
     },
     "shaunsingh/nord.nvim",
     "github/copilot.vim",
     "rcarriga/nvim-notify",
     "tpope/vim-fugitive",
-    -- {
-    -- 	"m4xshen/hardtime.nvim",
-    -- 	lazy = false,
-    -- 	dependencies = { "MunifTanjim/nui.nvim" },
-    -- 	opts = {
-    -- 		disable_mouse = false,
-    -- 	},
-    -- },
     {
         "nvim-treesitter/nvim-treesitter",
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                highlight = {
-                    enable = true,
-                },
-                ensure_installed = {
-                    "vimdoc",
-                    "luadoc",
-                    "vim",
-                    "lua",
-                    "markdown",
-                },
-            })
-        end,
+        opts = {
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false, -- disable the default vim regex highlighting
+            },
+            ensure_installed = {
+                "vimdoc",
+                "luadoc",
+                "vim",
+                "lua",
+                "markdown",
+            },
+        },
     },
     {
         "rmagatti/auto-session",
-        -- lazy = false,
-        config = function()
-            require("auto-session").setup({
-                log_level = "error",
-                suppressed_dirs = { "~/", "~/Downloads", "/" },
-            })
-        end,
+        opts = {
+            log_level = "error",
+            auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+        },
     },
     {
         "m00qek/baleia.nvim",
@@ -185,8 +154,6 @@ vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- otherwise it gets overw
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
--- vim.opt.tabstop = 8
--- vim.opt.softtabstop = 0
 vim.opt.smarttab = true
 vim.opt.expandtab = true
 vim.opt.list = true
@@ -207,7 +174,7 @@ local lspconfig = require("lspconfig")
 
 local servers =
 { "html", "cssls", "ts_ls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright",
-    "gopls", "lua_ls" }
+    "gopls", "lua_ls", "biome" }
 
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
