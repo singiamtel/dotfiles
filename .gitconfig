@@ -19,6 +19,7 @@
     bb = !better-git-branch.sh
     bl = blame -w -C -C -C
     pushfl = push --force-with-lease
+	adog = log --all --decorate --oneline --graph --stat
 [include] # Not in repo
     path= ~/.gitconfig_local
 [commit] # Show diff in commit message
