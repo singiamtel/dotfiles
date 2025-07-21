@@ -92,6 +92,7 @@ require("lazy").setup({
     "tpope/vim-fugitive",
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
         opts = {
             highlight = {
                 enable = true,
