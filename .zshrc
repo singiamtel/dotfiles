@@ -1,6 +1,7 @@
 # shellcheck shell=bash
 
 # Autoload functions
+fpath=($(brew --prefix)/share/zsh/site-functions $fpath) # macos
 autoload edit-command-line; zle -N edit-command-line
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -25,7 +26,7 @@ setopt hist_ignore_space
 setopt share_history
 
 # PATH setup
-[[ -d "/opt/homebrew/opt/python@3.13/libexec/bin" ]] && export PATH="$PATH:/opt/homebrew/opt/python@3.13/libexec/bin"
+[[ -d "/opt/homebrew/opt/python@3.13/libexec/bin" ]] && export PATH="$PATH:/opt/homebrew/opt/python@3.13/libexec/bin" # macos
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/bin/scripts"
 export PATH="$PATH:$HOME/.local/bin/scripts/private"
@@ -33,8 +34,8 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.bun/bin"
 export GOPATH="$HOME/.local/share/go"
 
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
-antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
+source "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh"
+antidote load "${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
 
 # Git aliases (replacing the git plugin)
 alias g='git'
@@ -59,7 +60,10 @@ alias grb='git rebase'
 alias gst='git status'
 alias gcp='git cherry-pick'
 alias grv='git remote -v'
+alias gra='git remote a'
+alias grr='git remote rm'
 alias gsh='git show'
+alias gcl='git clone'
 
 # fzf-tab configuration
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
@@ -152,3 +156,7 @@ gs () {
     git branch -vv
     git status
 }
+
+alias claude="/Users/sergio/.claude/local/claude"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

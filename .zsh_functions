@@ -43,3 +43,22 @@ function -auto-ls-after-cd() {
   fi
 }
 add-zsh-hook chpwd -auto-ls-after-cd
+
+# mkdir with -p option and auto cd into the new directory
+function take() {
+  emulate -L zsh
+  if [ $# -eq 0 ]; then
+    echo "Usage: take <directory>"
+    return 1
+  fi
+  mkdir -p "$1" && cd "$1"
+}
+
+function alidist_take() {
+    target_dir=$(alidist_repo "$1" | grep "TARGET_DIR=" | cut -d= -f2)
+    cd "$target_dir" || {
+        echo "Failed to change directory to $target_dir"
+        return 1
+    }
+}
+
