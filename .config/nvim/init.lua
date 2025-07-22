@@ -169,25 +169,12 @@ vim.cmd([[colorscheme nord]])
 
 vim.o.guifont = "FiraCode Nerd Font Propo:h12"
 
--- lsp
-local lspconfig = require("lspconfig")
-
-local servers =
-{ "html", "cssls", "ts_ls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright",
-    "gopls", "lua_ls", "biome" }
-
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-    })
-end
-
+vim.lsp.enable({ "html", "cssls", "ts_ls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright","gopls", "lua_ls", "biome" })
 -- vim.lsp.enable({ "pyrefly" })
 
-lspconfig.terraformls.setup({
-    on_attach = function()
-        require("treesitter-terraform-doc").setup()
-    end,
-    capabilities = capabilities,
-})
+-- lspconfig.terraformls.setup({
+--     on_attach = function()
+--         require("treesitter-terraform-doc").setup()
+--     end,
+--     capabilities = capabilities,
+-- })
