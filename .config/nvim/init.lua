@@ -1,4 +1,4 @@
--- plugins
+-- Install lazy.nvim if not already installed
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -12,6 +12,8 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     })
 end
 vim.opt.rtp:prepend(lazypath)
+
+-- plugins
 
 require("lazy").setup({
     {
@@ -61,8 +63,7 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter-context",
     {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.6",
-        -- or                              , branch = '0.1.x',
+        branch = "master",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
@@ -72,17 +73,15 @@ require("lazy").setup({
         dependencies = {
             "neovim/nvim-lspconfig",
             -- "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
-            { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+            { "nvim-telescope/telescope.nvim", branch = "master", dependencies = { "nvim-lua/plenary.nvim" } },
         },
         lazy = false,
         branch = "regexp", -- This is the regexp branch, use this for the new version
         opts = {
-            settings = {
-                options = {
-                    debug = false,
-                    enable_cached_venvs = true,
-                    cached_venv_automatic_activation = true,
-                },
+            options = {
+                debug = false,
+                enable_cached_venvs = true,
+                cached_venv_automatic_activation = true,
             },
         },
     },
@@ -111,7 +110,7 @@ require("lazy").setup({
         "rmagatti/auto-session",
         opts = {
             log_level = "error",
-            auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
+            suppressed_dirs = { "~/", "~/Downloads", "/" }
         },
     },
     {
