@@ -34,8 +34,8 @@ M.setup = function()
     vim.keymap.set("n", "<leader><leader>", "<cmd>b#<cr>", { desc = "Switch to last buffer" })
     vim.keymap.set("n", "<c-j>", "<cmd>bn<cr>", { desc = "Next buffer" })
     vim.keymap.set("n", "<c-k>", "<cmd>bp<cr>", { desc = "Previous buffer" })
-    vim.keymap.set("n", "<leader>c", "<cmd> silent execute '!cursor . --goto %:' . line('.') . ':' . col('.')<cr>",
-        { desc = "Open in Cursor" })
+    vim.keymap.set("n", "<leader>c", "<cmd> silent execute '!code . --goto %:' . line('.') . ':' . col('.')<cr>",
+        { desc = "Open in VScode" })
 
 
     -- diffs
@@ -91,6 +91,8 @@ M.setup = function()
     vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope: Buffers" })
     vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Telescope: Help tags" })
     vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "Telescope: Keymaps" })
+    vim.keymap.set("n", "<leader>fc", telescope.commands, { desc = "Telescope: Commands" })
+    vim.keymap.set("n", "<leader>fl", telescope.lsp_document_symbols, { desc = "Telescope: LSP Document Symbols" })
 end
 
 return M
