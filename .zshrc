@@ -100,7 +100,10 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # External tool initialization
 eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(fnm env --version-file-strategy=recursive)"
+
+# eval "$(fnm env --version-file-strategy=recursive)"
+eval "$(mise activate zsh)"
+
 eval "$(direnv hook zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
@@ -120,7 +123,7 @@ export NIXPKGS_ALLOW_UNFREE=1
 export FZF_DEFAULT_COMMAND='fd --type f'
 
 # Aliases
-alias act='act --container-architecture linux/amd64' # for M1
+# alias act='act --container-architecture linux/amd64' # for M1
 alias ka="killall"
 alias calc="python -i ~/.config/math_mode.py"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
@@ -145,8 +148,10 @@ alias tidy="tidy --tidy-mark no"
 alias yt="yt-dlp --add-metadata -i" # Download video link
 alias yta="yt -x -f bestaudio/best" # Download only audio
 alias xhjb="noglob xh --offline --print=B fake.url" # https://blog.stulta.dev/posts/annoying_json/
+alias npx="bunx"
 
 alias -g G="|& rg -i"
+alias -g GA="|& rg -A 5 -B 5 -i"
 alias -g CP="|& pbcopy"
 alias -g V="|& vim -"
 alias -g TEE="> >(tee -a stdout.log) 2> >(tee -a stderr.log >&2)"
