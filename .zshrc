@@ -150,6 +150,12 @@ alias yta="yt -x -f bestaudio/best" # Download only audio
 alias xhjb="noglob xh --offline --print=B fake.url" # https://blog.stulta.dev/posts/annoying_json/
 alias npx="bunx"
 
+alias -g '...'='../..'
+alias -g '....'='../../..'
+alias -g '.....'='../../../..'
+alias -g '......'='../../../../..'
+alias -g '.......'='../../../../../..'
+alias -g '........'='../../../../../../..'
 alias -g G="|& rg -i"
 alias -g GA="|& rg -A 5 -B 5 -i"
 alias -g CP="|& pbcopy"
@@ -165,3 +171,5 @@ gs () {
 alias claude="/Users/sergio/.claude/local/claude"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
