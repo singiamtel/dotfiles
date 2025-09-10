@@ -76,7 +76,7 @@ require("lazy").setup({
             { "nvim-telescope/telescope.nvim", branch = "master", dependencies = { "nvim-lua/plenary.nvim" } },
         },
         lazy = false,
-        branch = "regexp", -- This is the regexp branch, use this for the new version
+        branch = "main",
         opts = {
             options = {
                 debug = false,
