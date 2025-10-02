@@ -1,4 +1,4 @@
-theme = dark:nord,light:GitHub-Light-Default
+theme = dark:nord,light:GitHub Light Default
 keybind = super+enter=ignore
 keybind = shift+enter=text:\n
 quit-after-last-window-closed=true
