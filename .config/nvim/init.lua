@@ -189,7 +189,7 @@ vim.lsp.config('vtsls', {
   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
 
-vim.lsp.enable({ "html", "cssls", "ts_ls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright","gopls", "lua_ls", "biome", "vtsls", "vue_ls" })
+vim.lsp.enable({ "html", "cssls", "clangd", "eslint", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright","gopls", "lua_ls", "biome", "vtsls", "vue_ls" })
 
 -- vim.lsp.enable({ "pyrefly" })
 
