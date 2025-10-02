@@ -168,7 +168,7 @@ gs () {
     git status
 }
 
-alias claude="/Users/sergio/.claude/local/claude"
+alias claude="$HOME/.claude/local/claude"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
