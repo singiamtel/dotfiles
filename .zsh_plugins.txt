@@ -1,0 +1,4 @@
+Aloxaf/fzf-tab
+zsh-users/zsh-autosuggestions
+joshskidmore/zsh-fzf-history-search
+zsh-users/zsh-syntax-highlighting
