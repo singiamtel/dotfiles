@@ -1,4 +1,8 @@
 theme = dark:nord,light:GitHub Light Default
-keybind = super+enter=ignore
-keybind = shift+enter=text:\n
 quit-after-last-window-closed=true
+
+# Don't interfere with macOS full-screen
+keybind = super+enter=ignore
+
+# Fix shift=enter for Claude Code
+keybind = shift+enter=text:\x1b\r
