@@ -168,8 +168,6 @@ gs () {
     git status
 }
 
-alias claude="$HOME/.claude/local/claude"
-
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
