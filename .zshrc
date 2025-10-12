@@ -27,12 +27,13 @@ setopt share_history
 
 # PATH setup
 [[ -d "/opt/homebrew/opt/python@3.13/libexec/bin" ]] && export PATH="$PATH:/opt/homebrew/opt/python@3.13/libexec/bin" # macos
+export GOPATH="$HOME/.local/share/go"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.local/bin/scripts"
 export PATH="$PATH:$HOME/.local/bin/scripts/private"
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.bun/bin"
-export GOPATH="$HOME/.local/share/go"
+export PATH="$PATH:$GOPATH/bin"
 
 source "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh"
 antidote load "${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
