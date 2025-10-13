@@ -105,7 +105,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # eval "$(fnm env --version-file-strategy=recursive)"
 eval "$(mise activate zsh)"
 
-eval "$(direnv hook zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
