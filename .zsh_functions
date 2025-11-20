@@ -62,3 +62,11 @@ function alidist_take() {
     }
 }
 
+function git_take() {
+    target_dir=$(github_repo "$1" | grep "TARGET_DIR=" | cut -d= -f2)
+    cd "$target_dir" || {
+        echo "Failed to change directory to $target_dir"
+        return 1
+    }
+}
+

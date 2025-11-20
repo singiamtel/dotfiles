@@ -44,6 +44,8 @@
     prompt = false
 [difftool "difftastic"]
     cmd = difft "$LOCAL" "$REMOTE"
+[difftool "delta"]
+    cmd = delta "$LOCAL" "$REMOTE"
 [push]
     default = simple
     autoSetupRemote = true

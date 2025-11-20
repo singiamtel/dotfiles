@@ -125,7 +125,7 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # Aliases
 # alias act='act --container-architecture linux/amd64' # for M1
 alias ka="killall"
-alias calc="python -i ~/.config/math_mode.py"
+alias calc="uvx --with numpy python -i ~/.config/math_mode.py"
 alias config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 alias cd..="cd .."
 alias df="df -h"
@@ -171,3 +171,10 @@ gs () {
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

@@ -23,9 +23,17 @@ local function toggle_quickfix()
     end
 end
 
+local function trim()
+    local view = vim.fn.winsaveview()
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.fn.winrestview(view)
+end
+
 local M = {}
 
 local diff = require("diff")
+
+M.trim = trim
 
 M.setup = function()
     -- Buffer management
@@ -47,7 +55,7 @@ M.setup = function()
 
     -- Editor functions
     vim.keymap.set("n", "<F1>", noop, { desc = "Disable help popup" })
-    vim.keymap.set("n", "<leader>dt", "<cmd>:%s/\\s\\+$//e<cr>", { desc = "Delete trailing spaces" })
+    vim.keymap.set("n", "<leader>dt", trim, { desc = "Delete trailing spaces" })
     vim.keymap.set("n", "<leader>h", "<cmd>set hls!<cr>", { desc = "Toggle search highlighting" })
     vim.keymap.set("n", "<down>", "<c-e>", { silent = true })
     vim.keymap.set("n", "<up>", "<c-y>", { silent = true })
