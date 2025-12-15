@@ -44,6 +44,7 @@ M.setup = function()
     vim.keymap.set("n", "<c-k>", "<cmd>bp<cr>", { desc = "Previous buffer" })
     vim.keymap.set("n", "<leader>c", "<cmd> silent execute '!code . --goto %:' . line('.') . ':' . col('.')<cr>",
         { desc = "Open in VScode" })
+    vim.keymap.set("n", "<leader>t", "<cmd>Oil<cr>", { desc = "Open current directory with Oil.nvim" })
 
 
     -- diffs
