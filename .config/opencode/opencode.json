@@ -15,5 +15,6 @@
             "mode": "subagent",
             "prompt": "Make the smallest possible diff to complete the task"
         }
-    }
+    },
+  "formatter": false
 }
