@@ -115,7 +115,8 @@ source "$HOME/.cargo/env"
 # Environment variables
 export XDG_CONFIG_HOME="$HOME/.config"
 export MANPAGER='nvim +Man!'
-export PAGER="less -F -X -R"
+export LESS="-F -X -R -N -e"
+export PAGER="less"
 export EDITOR="nvim"
 GPG_TTY=$(tty)
 export GPG_TTY
