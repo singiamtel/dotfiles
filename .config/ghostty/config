@@ -6,3 +6,7 @@ keybind = super+enter=ignore
 
 clipboard-paste-protection = false
 # keybind = shift+enter=text:\x1b\r
+
+clipboard-read = allow
+clipboard-write = allow
+unfocused-split-opacity = 1
