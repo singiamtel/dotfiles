@@ -4,7 +4,5 @@ quit-after-last-window-closed=true
 # Don't interfere with macOS full-screen
 keybind = super+enter=ignore
 
-# Fix shift=enter for Claude Code
-# keybind = shift+enter=text:\x1b\r
-
 clipboard-paste-protection = false
+# keybind = shift+enter=text:\x1b\r
