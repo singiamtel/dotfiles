@@ -9,4 +9,7 @@ clipboard-paste-protection = false
 
 clipboard-read = allow
 clipboard-write = allow
+
+macos-option-as-alt = true
+
 unfocused-split-opacity = 1
