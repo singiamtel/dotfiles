@@ -185,7 +185,7 @@ vim.opt.listchars = {
     tab = "!·",
     trail = "·",
 }
-vim.opt.diffopt:append("horizontal")
+-- vim.opt.diffopt:append("horizontal")
 
 vim.cmd([[autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab]])
 
