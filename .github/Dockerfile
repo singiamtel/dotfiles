@@ -67,10 +67,12 @@ RUN cd /tmp/dotfiles && \
     cp .zshrc /home/$USERNAME/ && \
     cp .zsh_functions /home/$USERNAME/ && \
     cp .tmux.conf /home/$USERNAME/ && \
-    cp .gitconfig /home/$USERNAME/ 2>/dev/null || true && \
     # Setup neovim
     mkdir -p /home/$USERNAME/.config/nvim && \
     cp -r .config/nvim/* /home/$USERNAME/.config/nvim/ 2>/dev/null || true && \
+    # Remove git config that rewrites HTTPS to SSH (breaks plugin installs in container)
+    rm -f /home/$USERNAME/.config/git/config && \
+    rm -f /home/$USERNAME/.gitconfig && \
     # Clean up
     rm -rf /tmp/dotfiles && \
     # Set zsh as default shell
