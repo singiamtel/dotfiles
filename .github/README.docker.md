@@ -38,10 +38,11 @@ docker run -it --name dev \
 
 ## What's Included
 
-- **Shell**: zsh with your config and functions
+- **Shell**: zsh with your config and functions (cross-platform compatible)
 - **Editor**: neovim with your config
 - **Terminal**: tmux with your config
-- **Tools**: git, ranger, fzf, ripgrep, fd, bat, lazygit, htop
+- **Tools**: git, ranger, fzf, ripgrep, fd, bat, lazygit, htop, eza
+- **Shell Enhancements**: starship prompt, atuin history, zoxide, direnv
 - **Dotfiles**: All configs from `.config/`
 
 ## GitHub Actions

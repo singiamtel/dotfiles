@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
     python3-venv \
     python3-pip \
     golang-go \
+    pkg-config \
+    libssl-dev \
     \
     bat \
     fzf \
@@ -24,6 +26,7 @@ RUN apt-get update && apt-get install -y \
     fd-find \
     htop \
     ca-certificates \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install lazygit from GitHub releases (latest version, multi-arch)
@@ -62,6 +65,11 @@ RUN curl https://mise.run | sh && \
     /home/$USERNAME/.local/bin/mise use -g neovim@latest && \
     /home/$USERNAME/.local/bin/mise use -g node@latest && \
     /home/$USERNAME/.local/bin/mise use -g go@latest && \
+    /home/$USERNAME/.local/bin/mise use -g atuin@latest && \
+    /home/$USERNAME/.local/bin/mise use -g rust@latest && \
+    /home/$USERNAME/.local/bin/mise use -g cargo:eza && \
+    /home/$USERNAME/.local/bin/mise use -g fzf@latest && \
+    /home/$USERNAME/.local/bin/mise use -g fd@latest && \
     /home/$USERNAME/.local/share/mise/shims/npm install -g tree-sitter-cli neovim
 
 # Install LSP servers via npm
@@ -70,6 +78,15 @@ RUN /home/$USERNAME/.local/share/mise/shims/npm install -g @vue/language-server
 
 # Install LSP servers via go (rust-analyzer uses a different method now, skip for now)
 RUN /home/$USERNAME/.local/share/mise/shims/go install golang.org/x/tools/gopls@latest
+
+# Install starship prompt
+RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
+
+# Install zoxide
+RUN curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
+# Install direnv
+RUN curl -sfL https://direnv.net/install.sh | bash
 
 # Install clang for C/C++ LSP support (as root)
 USER root
@@ -134,7 +151,7 @@ SHELL ["/bin/zsh", "-c"]
 
 USER $USERNAME
 # Ensure PATH is set for zsh
-ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:/home/$USERNAME/go/bin:${PATH}"
+ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:/home/$USERNAME/go/bin:/usr/local/bin:${PATH}"
 
 # Default command
 CMD ["/bin/zsh"]
