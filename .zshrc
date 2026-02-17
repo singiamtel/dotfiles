@@ -108,6 +108,7 @@ eval "$(mise activate zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
 
 source "$HOMEBREW_PREFIX/opt/modules/init/zsh"
 source "$HOME/.cargo/env"
@@ -179,3 +180,4 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+eval "$(try init)"
