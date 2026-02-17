@@ -17,6 +17,13 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
+        "williamboman/mason.nvim",
+    },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = { "williamboman/mason.nvim" },
+    },
+    {
         "folke/which-key.nvim",
         {
             'gelguy/wilder.nvim',
@@ -149,6 +156,18 @@ vim.notify = require("notify")
 require("keymaps").setup()
 
 -- options
+-- OSC 52 clipboard (works in terminals that support it)
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+  },
+}
 vim.opt.clipboard:append({ "unnamedplus" })
 vim.opt.ignorecase = true
 vim.opt.hlsearch = false
@@ -180,34 +199,10 @@ vim.cmd([[colorscheme nord]])
 
 vim.o.guifont = "FiraCode Nerd Font Propo:h12"
 
-local vue_language_server_path = '/path/to/@vue/language-server'
-local vue_plugin = {
-  name = '@vue/typescript-plugin',
-  location = vue_language_server_path,
-  languages = { 'vue' },
-  configNamespace = 'typescript',
-}
-vim.lsp.config('vtsls', {
-  settings = {
-    vtsls = {
-      tsserver = {
-        globalPlugins = {
-          vue_plugin,
-        },
-      },
-    },
-  },
-  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+-- LSP servers managed by mason.nvim
+-- Servers are installed during container build, not at runtime
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = {}, -- empty since we install during build
+  automatic_installation = false,
 })
-
-vim.lsp.enable({ "html", "cssls", "clangd", "rust_analyzer", "tailwindcss", "terraform_lsp", "bashls", "pyright", "gopls", "lua_ls", "biome", "vtsls", "vue_ls" })
--- "eslint", 
-
--- vim.lsp.enable({ "pyrefly" })
-
--- lspconfig.terraformls.setup({
---     on_attach = function()
---         require("treesitter-terraform-doc").setup()
---     end,
---     capabilities = capabilities,
--- })
