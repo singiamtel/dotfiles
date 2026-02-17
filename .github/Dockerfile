@@ -7,7 +7,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     zsh \
     git \
-    neovim \
     tmux \
     ranger \
     curl \
@@ -53,6 +52,13 @@ RUN if id -u ubuntu >/dev/null 2>&1; then deluser ubuntu; fi \
     && echo "$USERNAME ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && rm -rf /var/lib/apt/lists/*
+
+# Install mise and neovim
+USER $USERNAME
+RUN curl https://mise.run | sh && \
+    /home/$USERNAME/.local/bin/mise use -g neovim@latest
+ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:${PATH}"
+USER root
 
 # Set working directory
 WORKDIR /home/$USERNAME
