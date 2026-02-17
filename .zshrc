@@ -1,7 +1,9 @@
 # shellcheck shell=bash
 
 # Autoload functions
-fpath=($(brew --prefix)/share/zsh/site-functions $fpath) # macos
+if command -v brew >/dev/null 2>&1; then
+    fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+fi
 autoload edit-command-line; zle -N edit-command-line
 autoload -Uz compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -35,8 +37,10 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.bun/bin"
 export PATH="$PATH:$GOPATH/bin"
 
-source "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh"
-antidote load "${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
+if [[ -f "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh" ]]; then
+    source "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh"
+    antidote load "${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
+fi
 
 # Git aliases (replacing the git plugin)
 alias g='git'
@@ -100,7 +104,9 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # External tool initialization
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if command -v brew >/dev/null 2>&1; then
+    eval "$(brew shellenv)"
+fi
 
 # eval "$(fnm env --version-file-strategy=recursive)"
 eval "$(mise activate zsh)"
@@ -110,8 +116,12 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
 
-source "$HOMEBREW_PREFIX/opt/modules/init/zsh"
-source "$HOME/.cargo/env"
+if [[ -n "$HOMEBREW_PREFIX" && -f "$HOMEBREW_PREFIX/opt/modules/init/zsh" ]]; then
+    source "$HOMEBREW_PREFIX/opt/modules/init/zsh"
+fi
+if [[ -f "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
 
 # Environment variables
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -172,12 +182,15 @@ gs () {
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
-export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+if [[ -d "/opt/homebrew/opt/postgresql@18/bin" ]]; then
+    export PATH="/opt/homebrew/opt/postgresql@18/bin:$PATH"
+fi
+if [[ -d "/opt/homebrew/opt/rustup/bin" ]]; then
+    export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
+fi
 
 # Added by Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-eval "$(try init)"
