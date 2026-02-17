@@ -2,6 +2,7 @@ FROM ubuntu:24.04
 
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Install basic dependencies
 RUN apt-get update && apt-get install -y \
@@ -13,9 +14,10 @@ RUN apt-get update && apt-get install -y \
     wget \
     build-essential \
     python3 \
+    python3-venv \
     python3-pip \
-    nodejs \
-    npm \
+    golang-go \
+    \
     bat \
     fzf \
     ripgrep \
@@ -55,9 +57,27 @@ RUN if id -u ubuntu >/dev/null 2>&1; then deluser ubuntu; fi \
 
 # Install mise and neovim
 USER $USERNAME
+ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:/home/$USERNAME/go/bin:${PATH}"
 RUN curl https://mise.run | sh && \
-    /home/$USERNAME/.local/bin/mise use -g neovim@latest
-ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:${PATH}"
+    /home/$USERNAME/.local/bin/mise use -g neovim@latest && \
+    /home/$USERNAME/.local/bin/mise use -g node@latest && \
+    /home/$USERNAME/.local/bin/mise use -g go@latest && \
+    /home/$USERNAME/.local/share/mise/shims/npm install -g tree-sitter-cli neovim
+
+# Install LSP servers via npm
+RUN /home/$USERNAME/.local/share/mise/shims/npm install -g bash-language-server typescript typescript-language-server vscode-langservers-extracted
+RUN /home/$USERNAME/.local/share/mise/shims/npm install -g @vue/language-server
+
+# Install LSP servers via go (rust-analyzer uses a different method now, skip for now)
+RUN /home/$USERNAME/.local/share/mise/shims/go install golang.org/x/tools/gopls@latest
+
+# Install clang for C/C++ LSP support (as root)
+USER root
+RUN apt-get update && apt-get install -y clangd && rm -rf /var/lib/apt/lists/*
+USER $USERNAME
+
+# Install Python LSP server
+RUN pip3 install --break-system-packages python-lsp-server
 USER root
 
 # Set working directory
@@ -105,13 +125,16 @@ USER $USERNAME
 # Configure git to always use HTTPS instead of SSH for github.com
 RUN git config --global url."https://github.com/".insteadOf git@github.com: && \
     git config --global url."https://github.com/".insteadOf ssh://git@github.com/ && \
-    HOME=/home/$USERNAME nvim --headless "+Lazy! sync" +qa
+    HOME=/home/$USERNAME nvim --headless "+Lazy! sync" +qa && \
+    HOME=/home/$USERNAME nvim --headless "+TSUpdate" +qa
 USER root
 
 # Set default shell
 SHELL ["/bin/zsh", "-c"]
 
 USER $USERNAME
+# Ensure PATH is set for zsh
+ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:/home/$USERNAME/go/bin:${PATH}"
 
 # Default command
 CMD ["/bin/zsh"]
