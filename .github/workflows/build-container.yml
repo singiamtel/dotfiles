@@ -70,7 +70,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          outputs: type=image,push=true,push-by-digest=true,name-canonical=true
 
   manifest:
     if: github.event_name != 'pull_request'
