@@ -78,6 +78,7 @@ RUN curl https://mise.run | sh && \
     /home/$USERNAME/.local/bin/mise use -g fzf@latest && \
     /home/$USERNAME/.local/bin/mise use -g fd@latest && \
     /home/$USERNAME/.local/bin/mise use -g zoxide@latest && \
+    /home/$USERNAME/.local/bin/mise use -g difftastic@latest && \
     /home/$USERNAME/.local/share/mise/shims/npm install -g tree-sitter-cli neovim
 
 # Install LSP servers via npm
@@ -142,7 +143,6 @@ USER $USERNAME
 # Configure git to always use HTTPS instead of SSH for github.com
 RUN git config --global url."https://github.com/".insteadOf git@github.com: && \
     git config --global url."https://github.com/".insteadOf ssh://git@github.com/ && \
-    rm -f /home/$USERNAME/.config/nvim/lazy-lock.json && \
     HOME=/home/$USERNAME nvim --headless "+Lazy! sync" +qa && \
     HOME=/home/$USERNAME nvim --headless "+TSUpdate" +qa
 USER root
