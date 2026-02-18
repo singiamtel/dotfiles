@@ -58,6 +58,11 @@ RUN if id -u ubuntu >/dev/null 2>&1; then deluser ubuntu; fi \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && rm -rf /var/lib/apt/lists/*
 
+# Install starship prompt, zoxide, and direnv as root
+RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
+RUN curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+RUN curl -sfL https://direnv.net/install.sh | bash
+
 # Install mise and neovim
 USER $USERNAME
 ENV PATH="/home/$USERNAME/.local/bin:/home/$USERNAME/.local/share/mise/shims:/home/$USERNAME/go/bin:${PATH}"
@@ -78,15 +83,6 @@ RUN /home/$USERNAME/.local/share/mise/shims/npm install -g @vue/language-server
 
 # Install LSP servers via go (rust-analyzer uses a different method now, skip for now)
 RUN /home/$USERNAME/.local/share/mise/shims/go install golang.org/x/tools/gopls@latest
-
-# Install starship prompt
-RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
-
-# Install zoxide
-RUN curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-
-# Install direnv
-RUN curl -sfL https://direnv.net/install.sh | bash
 
 # Install clang for C/C++ LSP support (as root)
 USER root
