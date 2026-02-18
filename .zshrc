@@ -37,7 +37,10 @@ export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="$PATH:$HOME/.bun/bin"
 export PATH="$PATH:$GOPATH/bin"
 
-if [[ -f "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh" ]]; then
+if [[ -f "/opt/antidote/antidote.zsh" ]]; then
+    source "/opt/antidote/antidote.zsh"
+    antidote load "${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
+elif [[ -f "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh" ]]; then
     source "/opt/homebrew/opt/antidote/share/antidote/antidote.zsh"
     antidote load "${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
 fi

@@ -58,10 +58,12 @@ RUN if id -u ubuntu >/dev/null 2>&1; then deluser ubuntu; fi \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
     && rm -rf /var/lib/apt/lists/*
 
-# Install starship prompt, zoxide, and direnv as root
+# Install starship prompt and direnv as root
 RUN curl -sS https://starship.rs/install.sh | sh -s -- --yes
-RUN curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
 RUN curl -sfL https://direnv.net/install.sh | bash
+
+# Install antidote for zsh plugin management
+RUN git clone --depth 1 https://github.com/mattmc3/antidote.git /opt/antidote
 
 # Install mise and neovim
 USER $USERNAME
@@ -75,6 +77,7 @@ RUN curl https://mise.run | sh && \
     /home/$USERNAME/.local/bin/mise use -g cargo:eza && \
     /home/$USERNAME/.local/bin/mise use -g fzf@latest && \
     /home/$USERNAME/.local/bin/mise use -g fd@latest && \
+    /home/$USERNAME/.local/bin/mise use -g zoxide@latest && \
     /home/$USERNAME/.local/share/mise/shims/npm install -g tree-sitter-cli neovim
 
 # Install LSP servers via npm
@@ -104,6 +107,7 @@ RUN cd /tmp/dotfiles && \
     # Copy config files
     cp -r .config /home/$USERNAME/ && \
     cp .zshrc /home/$USERNAME/ && \
+    cp .zsh_plugins.txt /home/$USERNAME/ && \
     cp .zsh_functions /home/$USERNAME/ && \
     cp .tmux.conf /home/$USERNAME/ && \
     # Setup neovim
