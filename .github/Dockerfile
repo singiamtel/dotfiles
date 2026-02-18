@@ -142,6 +142,7 @@ USER $USERNAME
 # Configure git to always use HTTPS instead of SSH for github.com
 RUN git config --global url."https://github.com/".insteadOf git@github.com: && \
     git config --global url."https://github.com/".insteadOf ssh://git@github.com/ && \
+    rm -f /home/$USERNAME/.config/nvim/lazy-lock.json && \
     HOME=/home/$USERNAME nvim --headless "+Lazy! sync" +qa && \
     HOME=/home/$USERNAME nvim --headless "+TSUpdate" +qa
 USER root
