@@ -5,7 +5,8 @@ quit-after-last-window-closed=true
 keybind = super+enter=ignore
 
 clipboard-paste-protection = false
-# keybind = shift+enter=text:\x1b\r
+keybind = shift+enter=text:\x1b\r
+# keybind = shift+enter=test:\e[13;2u
 
 clipboard-read = allow
 clipboard-write = allow
@@ -13,3 +14,4 @@ clipboard-write = allow
 macos-option-as-alt = true
 
 unfocused-split-opacity = 1
+font-size = 10
