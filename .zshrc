@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 
 # Autoload functions
-if command -v brew >/dev/null 2>&1; then
-    fpath=($(brew --prefix)/share/zsh/site-functions $fpath)
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+    fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
 fi
 autoload edit-command-line; zle -N edit-command-line
 autoload -Uz compinit && compinit
@@ -107,13 +107,12 @@ echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # External tool initialization
-if command -v brew >/dev/null 2>&1; then
-    eval "$(brew shellenv)"
+if [[ -x "/opt/homebrew/bin/brew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # eval "$(fnm env --version-file-strategy=recursive)"
 eval "$(mise activate zsh)"
-
 eval "$(atuin init zsh --disable-up-arrow)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
