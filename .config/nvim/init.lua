@@ -16,43 +16,8 @@ vim.opt.rtp:prepend(lazypath)
 -- plugins
 
 require("lazy").setup({
-    {
-        "williamboman/mason.nvim",
-    },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "williamboman/mason.nvim" },
-    },
-    {
-        "folke/which-key.nvim",
-        {
-            'gelguy/wilder.nvim',
-            config = function()
-                local wilder = require('wilder')
-                wilder.setup({ modes = { ':', '/', '?' } })
-
-                wilder.set_option('pipeline', {
-                    wilder.branch(
-                        wilder.cmdline_pipeline({
-                            fuzzy = 1,
-                            set_pcre2_pattern = 1,
-                        }),
-                        wilder.python_search_pipeline({
-                            pattern = 'fuzzy',
-                        })
-                    ),
-                })
-
-            end,
-        },
-        event = "VeryLazy",
-        init = function()
-            vim.o.timeout = true
-            vim.o.timeoutlen = 300
-        end,
-    },
-    { "kevinhwang91/nvim-bqf", ft = "qf" },
     "neovim/nvim-lspconfig",
+    { "kevinhwang91/nvim-bqf", ft = "qf" },
     "junegunn/fzf",
     "nvim-treesitter/nvim-treesitter-context",
     {
@@ -198,11 +163,3 @@ vim.cmd([[autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 vim.cmd([[colorscheme nord]])
 
 vim.o.guifont = "FiraCode Nerd Font Propo:h12"
-
--- LSP servers managed by mason.nvim
--- Servers are installed during container build, not at runtime
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = {}, -- empty since we install during build
-  automatic_installation = false,
-})
