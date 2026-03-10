@@ -11,7 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     })
 end
-vim.opt.rtp:prepend(lazypath)
+vim.o.rtp:prepend(lazypath)
 
 -- plugins
 
@@ -120,25 +120,27 @@ vim.notify = require("notify")
 
 require("keymaps").setup()
 
--- options
--- OSC 52 clipboard (works in terminals that support it)
-vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-  },
-  paste = {
-    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-  },
-}
-vim.opt.clipboard:append({ "unnamedplus" })
-vim.opt.ignorecase = true
-vim.opt.hlsearch = false
-vim.opt.smartcase = true
-vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo" -- -_-
-vim.opt.undofile = true
+-- OSC 52 clipboard only on remote (SSH) sessions
+if os.getenv "SSH_CONNECTION" ~= nill then
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+    },
+  }
+end
+
+vim.o.clipboard:append({ "unnamedplus" })
+vim.o.ignorecase = true
+vim.o.hlsearch = false
+vim.o.smartcase = true
+vim.o.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo" -- -_-
+vim.o.undofile = true
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.o.number = true
@@ -146,19 +148,21 @@ vim.o.relativenumber = true
 vim.g.nord_contrast = true
 vim.cmd([[autocmd FileType * set formatoptions-=ro]]) -- otherwise it gets overwritten by some random ftplugin. absolutely bullshit
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.smarttab = true
-vim.opt.expandtab = true
-vim.opt.list = true
-vim.opt.listchars = {
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.smarttab = true
+vim.o.expandtab = true
+vim.o.list = true
+vim.o.listchars = {
     tab = "!·",
     trail = "·",
 }
--- vim.opt.diffopt:append("horizontal")
+-- vim.o.diffopt:append("horizontal")
 
 vim.cmd([[autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab]])
+
+vim.lsp.enable("pyrefly")
 
 vim.cmd([[colorscheme nord]])
 
