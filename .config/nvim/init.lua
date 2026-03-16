@@ -11,7 +11,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         lazypath,
     })
 end
-vim.o.rtp:prepend(lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 -- plugins
 
@@ -135,7 +135,7 @@ if os.getenv "SSH_CONNECTION" ~= nill then
   }
 end
 
-vim.o.clipboard:append({ "unnamedplus" })
+vim.opt.clipboard:append({ "unnamedplus" })
 vim.o.ignorecase = true
 vim.o.hlsearch = false
 vim.o.smartcase = true
@@ -154,7 +154,7 @@ vim.o.shiftwidth = 4
 vim.o.smarttab = true
 vim.o.expandtab = true
 vim.o.list = true
-vim.o.listchars = {
+vim.opt.listchars = {
     tab = "!·",
     trail = "·",
 }
