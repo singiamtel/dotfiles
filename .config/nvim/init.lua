@@ -28,6 +28,18 @@ require("lazy").setup({
         },
     },
     {
+        "dmtrKovalenko/fff.nvim",
+        build = function()
+            require("fff.download").download_or_build_binary()
+        end,
+        lazy = false,
+        opts = {
+            keymaps = {
+                close = { "<Esc>", "<C-c>" },
+            },
+        },
+    },
+    {
         "linux-cultist/venv-selector.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",

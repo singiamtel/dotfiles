@@ -91,11 +91,8 @@ M.setup = function()
     local telescope = require("telescope.builtin")
     vim.keymap.set("n", "<leader>ea", telescope.diagnostics, { desc = "Telescope: Diagnostics" })
     vim.keymap.set("n", "<leader>ff", function()
-        telescope.find_files({
-            hidden = true,
-            file_ignore_patterns = { "^.git/" },
-        })
-    end, { desc = "Telescope: Find files" })
+        require("fff").find_files()
+    end, { desc = "fff: Find files" })
     vim.keymap.set("n", "<leader>fw", telescope.live_grep, { desc = "Telescope: Live grep" })
     vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Telescope: Buffers" })
     vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Telescope: Help tags" })
