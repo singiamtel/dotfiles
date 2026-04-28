@@ -57,7 +57,6 @@ require("lazy").setup({
         },
     },
     "shaunsingh/nord.nvim",
-    "github/copilot.vim",
     "rcarriga/nvim-notify",
     "tpope/vim-fugitive",
     {
