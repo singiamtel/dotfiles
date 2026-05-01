@@ -24,5 +24,6 @@
   },
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
-  "preferredNotifChannel": "ghostty"
+  "preferredNotifChannel": "ghostty",
+  "effortLevel": "medium"
 }

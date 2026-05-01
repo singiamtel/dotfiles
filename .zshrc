@@ -113,7 +113,8 @@ fi
 
 # eval "$(fnm env --version-file-strategy=recursive)"
 eval "$(mise activate zsh)"
-eval "$(atuin init zsh --disable-up-arrow)"
+eval "$(atuin init zsh --disable-up-arrow --disable-ai)"
+# eval "$(atuin hex init)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 eval "$(direnv hook zsh)"
@@ -196,3 +197,6 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
+
+export DO_NOT_TRACK=true
