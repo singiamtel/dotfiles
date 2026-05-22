@@ -22,8 +22,13 @@
       }
     }
   },
+  "effortLevel": "medium",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
   "skipDangerousModePermissionPrompt": true,
   "editorMode": "vim",
   "preferredNotifChannel": "ghostty",
-  "effortLevel": "medium"
+  "voiceEnabled": true
 }
