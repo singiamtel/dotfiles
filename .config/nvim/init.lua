@@ -174,6 +174,7 @@ vim.opt.listchars = {
 vim.cmd([[autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab]])
 
 vim.lsp.enable("pyrefly")
+vim.lsp.enable("vtsls")
 
 vim.cmd([[colorscheme nord]])
 
