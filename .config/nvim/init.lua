@@ -127,6 +127,9 @@ require("lazy").setup({
     },
 })
 
+-- fix common mistype :Wq -> :wq
+vim.cmd([[cnoreabbrev <expr> Wq getcmdtype() == ':' && getcmdline() == 'Wq' ? 'wq' : 'Wq']])
+
 vim.notify = require("notify")
 
 require("keymaps").setup()
