@@ -129,6 +129,7 @@ require("lazy").setup({
 
 -- fix common mistype :Wq -> :wq
 vim.cmd([[cnoreabbrev <expr> Wq getcmdtype() == ':' && getcmdline() == 'Wq' ? 'wq' : 'Wq']])
+vim.cmd([[cnoreabbrev <expr> Set getcmdtype() == ':' && getcmdline() == 'Set' ? 'set' : 'Set']])
 
 vim.notify = require("notify")
 
