@@ -199,4 +199,18 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
-export DO_NOT_TRACK=true
+# export DO_NOT_TRACK=true
+
+# Vite+ bin (https://viteplus.dev)
+source "$HOME/.vite-plus/env"
+
+# pnpm
+export PNPM_HOME="/Users/sergio/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end
+
+# Keep unmatched globs literal instead of aborting agent shell commands.
+setopt NONOMATCH

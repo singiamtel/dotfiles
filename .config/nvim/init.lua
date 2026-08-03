@@ -180,6 +180,8 @@ vim.cmd([[autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 vim.lsp.enable("pyrefly")
 vim.lsp.enable("vtsls")
 
+vim.o.termguicolors = true
 vim.cmd([[colorscheme nord]])
+vim.opt.guicursor = ""
 
 vim.o.guifont = "FiraCode Nerd Font Propo:h12"
