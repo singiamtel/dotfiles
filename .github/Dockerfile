@@ -1,5 +1,11 @@
 FROM ubuntu:24.04
 
+# Install the distribution CA update for the eMudhra incident.
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+ENV PIP_CERT=/etc/ssl/certs/ca-certificates.crt
+
+
 # Avoid interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
